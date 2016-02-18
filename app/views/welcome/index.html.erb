@@ -1,2 +1,17 @@
-<h1>My Quizzes</h1>
-<%= link_to 'My Quizzes', controller: 'quizzes' %>
+<!DOCTYPE html>
+<html lang='en'>
+	<h1>Quiz App</h1>
+
+	<div class="panel panel-info">
+  		<div class="panel-heading">
+    		<h3 class="panel-title">Quizzes</h3>
+  		</div>
+
+  		<div class="panel-body">
+    		See quizzes that are available.<br><br>
+    		<div id="button_text">
+    		<button type="button" class="btn btn-primary"><%= link_to 'My Quizzes', controller: 'quizzes'%></button>
+    		</div>
+  		</div>
+	</div>
+</html>
