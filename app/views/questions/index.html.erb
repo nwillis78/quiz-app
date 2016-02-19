@@ -1,0 +1,33 @@
+<h1>Listing Questions</h1>
+
+
+<div id="button_text">
+<button type = "button" class="btn btn-primary">
+<%= link_to 'New Question', new_question_path %></button>
+</div> 
+
+<table class="table table-striped">
+	<tr>
+		<th>Category</th>
+		<th>Question Body</th>
+	</tr>
+
+	<% @questions.each do |question| %>
+		<tr>
+			<td><%= question.category %></td>
+			<td><%= question.body %></td>
+			
+			<td><button type="button" class="btn btn-default"><%= link_to 'Show', question_path(question) %></button></td>
+
+			<td><button type= "button" class= "btn btn-default"><%= link_to 'Edit', edit_question_path(question)%></button></td>
+			
+			<td><div id="button_text">
+    		<button type="button" class="btn btn-danger"><%= link_to 'Destroy', question_path(question),
+			method: :delete, 
+			data: {confirm: 'Are you sure?'} %></button>
+    		</div></td>
+		</tr>
+	<% end %>
+</table>
+
+<%= link_to 'Back', welcome_index_path %>

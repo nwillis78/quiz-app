@@ -14,11 +14,6 @@
 	<%= @quiz.instructions %>
 </p>
 
-<h2>Questions</h2>
-<%= render @quiz.questions %>
-
-<h2>Add a question:</h2>
-<%= render 'questions/form' %>
 
 <%= link_to 'Edit', edit_quiz_path(@quiz) %>
 <%= link_to 'Back', quizzes_path %>

@@ -1,8 +1,8 @@
 class CreateQuestions < ActiveRecord::Migration
   def change
     create_table :questions do |t|
-      t.text :question
-      t.references :quiz, index: true, foreign_key: true
+      t.string :category
+      t.text :body
 
       t.timestamps null: false
     end

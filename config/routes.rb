@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
     
-  resources :quizzes do
-      resources :questions
-  end
+  resources :quizzes
+  resources :questions
     
   get 'welcome/index'
 

@@ -37,9 +37,12 @@
 
 	<div class="actions form-group" id="button_text">
 	<p>
-	<button type="button" class="btn btn-primary">
-		<%= f.submit %></button>
+	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+ 	Submit
+	<% end %>
 	</p>
 	</div>
+
+	
 
 <% end %>
