@@ -4,7 +4,7 @@
 	    <div id="error_explanation">
 	      <h2>
 	        <%= pluralize(@question.errors.count, "error") %> prohibited
-	        this article from being saved:
+	        this question from being saved:
 	      </h2>
 	      <ul>
 	        <% @question.errors.full_messages.each do |msg| %>
@@ -28,9 +28,24 @@
 	</p>
 	</div>
 
+	<h4>Answers</h4>
+	<div id="answers">
+		<%= f.fields_for :answers do |answer| %>
+			<%= render 'answer_fields', f: answer %>
+		<% end %>
+		<div class="links">
+			<%= link_to_add_association 'add answer', f, :answers %>
+		</div>
+	</div>
+
+	<br><br>
+	
+
+
+
 	<div class="actions form-group" id="button_text">
 	<p>
-	<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+	<%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
  	Submit
 	<% end %>
 	</p>
