@@ -1,11 +1,25 @@
-<div class="nested-fields">
-	<div class = "field">
-		<%= f.label :answerString %>
-		<%= f.text_field :answerString %>
-	</div>
+<div class="nested-fields" style="display: <%= f.object.marked_for_destruction? ? 'none' : 'block' %>">
+	<div class = "row">
+		<div class = "col-xs-8">
+			<div class = "field">
+				<%= f.label :answerString%>
+				<%= f.text_field :answerString, class: "text_field_in_grid" %>
+			</div>
+		</div>
+	<div class = "col-xs-2">
 	<div class = "field">
 		<%= f.check_box :isCorrect %>
 		<%= f.label :isCorrect %>
 	</div>
-	<%= link_to_remove_association "remove answer", f %>
+	</div>
+	<div class = "col-xs-2">
+	<div id="button_text">
+          		<button type="button" class="btn btn-primary"><%= link_to_remove_association "Remove answer", f %></button>
+          	</div>
+          	</div>
+
+          	<br>
+	
 </div>
+
+

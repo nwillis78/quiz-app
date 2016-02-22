@@ -48,5 +48,7 @@ class QuestionsController < ApplicationController
         def question_params
             params.require(:question).permit(:category, :body, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
         end
+
+       
     
 end
