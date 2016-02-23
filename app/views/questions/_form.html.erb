@@ -32,18 +32,32 @@
 
 	<h2>Answers</h2>
 	<div id="answers">
-		<%= f.fields_for :answers do |answer| %>
-			<%= render 'answer_fields', f: answer %>
-		<% end %>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Answer</th>
+					<th>isCorrect</th>
+				</tr>
+			</thead>
+			<tbody id="answer_table">
+				<%= f.fields_for :answers do |answer| %>
+					<%= render 'answer_fields', f: answer %>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
 
 	<div class="links">
 			<div id="button_text">
-          		<button type="button" class="btn btn-primary"><%= link_to_add_association 'Add answer', f, :answers %></button>
+          		<button type="button" class="btn btn-primary">
+          			<%= link_to_add_association f, :answers, :"data-association-insertion-node" => "tbody#answer_table", :"data-association-insertion-method" => "append", :partial => "answer_fields", :class => "button" do %>Add answer <% end %>
+          		</button>
         	</div>
 		</div>
 
 	<br><br>
+
+
 	
 
 

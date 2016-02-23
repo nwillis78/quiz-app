@@ -1,25 +1,26 @@
-<div class="nested-fields" style="display: <%= f.object.marked_for_destruction? ? 'none' : 'block' %>">
-	<div class = "row">
-		<div class = "col-xs-8">
-			<div class = "field">
-				<%= f.label :answerString%>
-				<%= f.text_field :answerString, class: "text_field_in_grid" %>
-			</div>
-		</div>
-	<div class = "col-xs-2">
-	<div class = "field">
-		<%= f.check_box :isCorrect %>
-		<%= f.label :isCorrect %>
-	</div>
-	</div>
-	<div class = "col-xs-2">
-	<div id="button_text">
-          		<button type="button" class="btn btn-primary"><%= link_to_remove_association "Remove answer", f %></button>
-          	</div>
-          	</div>
 
-          	<br>
+<tr class = "table_row">
+
+<div class="nested-fields" style="display: <%= f.object.marked_for_destruction? ? 'none' : 'block' %>">
 	
-</div>
+		<td class="col-sm-10">	
+			<div class = "field">
+				<%= f.text_field :answerString, class: "text_field_in_grid"%>
+			</div>
+		</td>
+		<td class="col-sm-1">
+			<div class = "field">
+				<%= f.check_box :isCorrect %>
+			</div>
+		</td>
+		<td>
+			<div id="button_text">
+				<button type="button" class="btn btn-danger">
+				<%= link_to_remove_association "Remove answer", f, {wrapper_class: 'table_row'} %>
+				</button>
+			</div>
+		</td>
+	
+</div></tr>
 
 
