@@ -10,6 +10,7 @@ class QuizzesController < ApplicationController
     
     def new
         @quiz = Quiz.new
+        @questions = Question.all
     end
     
     def edit
@@ -38,6 +39,13 @@ class QuizzesController < ApplicationController
         @quiz.destroy
         
         redirect_to quizzes_path
+    end
+
+    def update_questions
+        @questions = Question.where("category = ?", params[:category])
+        respond_to do |format|
+          format.js
+        end
     end
     
     private

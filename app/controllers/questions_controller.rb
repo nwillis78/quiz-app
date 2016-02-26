@@ -6,6 +6,11 @@ class QuestionsController < ApplicationController
     
     def show
         @question = Question.find(params[:id])
+        if @question.category != nil
+            @category = @question.category.categoryBody
+        else 
+            @category = 'Undefined'
+        end
     end
     
     def new
@@ -41,12 +46,11 @@ class QuestionsController < ApplicationController
         @question.destroy
         
         redirect_to questions_path
-    end
-        
+    end   
     
     private
         def question_params
-            params.require(:question).permit(:category, :body, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
+            params.require(:question).permit(:category_id, :body, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
         end
 
        

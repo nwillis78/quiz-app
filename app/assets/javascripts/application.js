@@ -15,5 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cocoon
+//= require quizzes
 //= require_tree .
 

@@ -1,11 +1,13 @@
 class Question < ActiveRecord::Base
     require_dependency 'lib/association_count_validator.rb'
 
+    belongs_to :category
+
+    has_many :links
+    has_many :quizzes, through: :links
+
     has_many :answers, dependent: :destroy, :autosave => true
     accepts_nested_attributes_for :answers, allow_destroy: true
-    
-    validates :category, presence: true,
-    length: { minimum: 5}
     
     validates :body, presence: true,
     length: { minimum: 5}

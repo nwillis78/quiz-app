@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219174337) do
+ActiveRecord::Schema.define(version: 20160226142606) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -23,12 +23,30 @@ ActiveRecord::Schema.define(version: 20160219174337) do
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
-  create_table "questions", force: :cascade do |t|
-    t.string   "category"
-    t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "categories", force: :cascade do |t|
+    t.string   "categoryBody"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
+
+  create_table "links", force: :cascade do |t|
+    t.integer  "quiz_id"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "links", ["question_id"], name: "index_links_on_question_id"
+  add_index "links", ["quiz_id"], name: "index_links_on_quiz_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.text     "body"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+  end
+
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id"
 
   create_table "quizzes", force: :cascade do |t|
     t.string   "title"

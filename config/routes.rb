@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
     
   resources :quizzes
+  resources :categories do
+      resources :questions
+  end
   resources :questions do
       resources :answers
   end
+  resources :links
     
   get 'welcome/index'
+  
+  #added for the dependent drop downs
+  #get 'quizzes/update_questions', as: 'update_questions'
+  #get 'quizzes/show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

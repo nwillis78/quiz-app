@@ -18,8 +18,8 @@
 
 	<div class="field form-group">
 	<p>
-		<%= f.label :category, class: 'control-label'%>	
-        <%= f.text_field :category, class: 'form-control' %>
+		<%= f.label :category_id, class: 'control-label'%>	
+		<%= f.select(:category_id, options_from_collection_for_select(Category.all, :id, :categoryBody) )%>
 	</p>
 	</div>
 
@@ -56,11 +56,6 @@
 		</div>
 
 	<br><br>
-
-
-	
-
-
 
 	<div class="actions form-group" id="button_text">
 	<p>
