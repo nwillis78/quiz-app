@@ -10,11 +10,14 @@ class QuizzesController < ApplicationController
     
     def new
         @quiz = Quiz.new
-        @questions = Question.all
+        @categories = Category.all
+        @questions = Question.where("category_id = ?", Category.first.id)
     end
     
     def edit
         @quiz = Quiz.find(params[:id])
+        @categories = Category.all
+        @questions = Question.where("category_id = ?", Category.first.id)
     end
     
     def create
@@ -41,12 +44,6 @@ class QuizzesController < ApplicationController
         redirect_to quizzes_path
     end
 
-    def update_questions
-        @questions = Question.where("category = ?", params[:category])
-        respond_to do |format|
-          format.js
-        end
-    end
     
     private
         def quiz_params

@@ -1,2 +1,2 @@
-$("#questionsbody_select").empty()
+$("#questions_select").empty()
   .append("<%= escape_javascript(render(:partial => @questions)) %>")

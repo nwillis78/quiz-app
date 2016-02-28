@@ -1,15 +1,26 @@
 Rails.application.routes.draw do
     
   resources :quizzes
+  
   resources :categories do
-      resources :questions
+      resources :questions do
+          resources :answers
+          member do
+              get :quizzes
+          end
+      end
   end
-  resources :questions do
-      resources :answers
-  end
+  
   resources :links
     
   get 'welcome/index'
+  
+  
+  get 'questions/update_questions', as: 'update_questions'
+  #get 'questions/update_questions?category_id' => 'questions#update_questions', as: 'update_questions', :format => :json
+  get 'questions/show_questions'
+  
+  #get '/update_questions' => 'quizzes#update_questions', as: :update_questions
   
   #added for the dependent drop downs
   #get 'quizzes/update_questions', as: 'update_questions'

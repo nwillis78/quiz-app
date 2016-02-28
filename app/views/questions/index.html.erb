@@ -3,7 +3,7 @@
 
 <div id="button_text">
 <button type = "button" class="btn btn-primary">
-<%= link_to 'New Question', new_question_path %></button>
+<%= link_to 'New Question', new_category_question_path %></button>
 </div> 
 
 <br>
@@ -20,17 +20,17 @@
 				<% if question.category != nil %>
 		    		<%=question.category.categoryBody%>
 		    	<% else %>
-		    		Undefined
+		    		Undefined<%=question.id%>
 				<% end %>
 			</td>
 			<td><%= question.body %></td>
 			
-			<td><button type="button" class="btn btn-default"><%= link_to 'Show', question_path(question) %></button></td>
+			<td><button type="button" class="btn btn-default"><%= link_to 'Show', category_question_path(question.category_id, question.id) %></button></td>
 
-			<td><button type= "button" class= "btn btn-default"><%= link_to 'Edit', edit_question_path(question)%></button></td>
+			<td><button type= "button" class= "btn btn-default"><%= link_to 'Edit', edit_category_question_path(question, question.id)%></button></td>
 			
 			<td><div id="button_text">
-    		<button type="button" class="btn btn-danger"><%= link_to 'Destroy', question_path(question),
+    		<button type="button" class="btn btn-danger"><%= link_to 'Destroy', category_question_path(question.category_id, question.id),
 			method: :delete, 
 			data: {confirm: 'Are you sure?'} %></button>
     		</div></td>

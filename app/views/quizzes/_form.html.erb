@@ -37,7 +37,15 @@
 
 	<h2>Questions</h2>
 	<p>Select a question from the question bank and add it to this quiz</p>
-	
+	<%= form_for :links, html: {method: "get"} do |f| %>
+
+	  <%= f.select :category_id, options_for_select(@categories.collect { |category|
+	    [category.categoryBody.titleize, category.id] }, 1), {}, { id: 'categories_select' } %>
+
+	  <%= f.select :question_id, options_for_select(@questions.collect { |question|
+	    [question.body, question.id] }, 0), {}, { id: 'questions_select' } %>
+
+	<% end %>
 
     <br><br>
 

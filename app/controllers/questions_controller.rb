@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
     
     def show
         @question = Question.find(params[:id])
+  
         if @question.category != nil
             @category = @question.category.categoryBody
         else 
@@ -15,19 +16,21 @@ class QuestionsController < ApplicationController
     
     def new
         @question = Question.new
+        @category = Category.first
     end
     
     def edit
         @question = Question.find(params[:id])
+        @category = @question.category
     end
     
     def create
         @question = Question.new(question_params)
         
         if @question.save
-            redirect_to @question
+            redirect_to category_question_path(@question.category_id, @question)
         else
-            render 'new'
+            render 'questions/new'
         end
     end
     
@@ -35,7 +38,7 @@ class QuestionsController < ApplicationController
         @question = Question.find(params[:id])
         
         if @question.update(question_params)
-            redirect_to @question
+            redirect_to category_question_path(@question.category_id, @question)
         else
             render 'edit'
         end
@@ -44,9 +47,21 @@ class QuestionsController < ApplicationController
     def destroy
         @question = Question.find(params[:id])
         @question.destroy
+        @questions = Question.all
         
-        redirect_to questions_path
-    end   
+        redirect_to category_questions_path(@questions)
+    end 
+
+    def update_questions
+        @questions = Question.where("category_id = ?", params[:category_id])
+        respond_to do |format|
+          format.js
+        end
+    end  
+
+    def show_questions
+        @question = Question.find_by("id = ?", params[:links][:category_id])
+    end
     
     private
         def question_params
