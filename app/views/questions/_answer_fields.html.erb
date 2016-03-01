@@ -1,7 +1,6 @@
+<tr class = "table_row" >
 
-<tr class = "table_row">
-
-<div class="nested-fields" style="display: <%= f.object.marked_for_destruction? ? 'none' : 'block' %>">
+<div class="nested-fields" >
 	
 		<td class="col-sm-10">	
 			<div class = "field">
@@ -13,7 +12,7 @@
 				<%= f.check_box :isCorrect %>
 			</div>
 		</td>
-		<td>
+		<td class="col-sm-1">
 			<div id="button_text">
 				<button type="button" class="btn btn-danger">
 				<%= link_to_remove_association "Remove answer", f, {wrapper_class: 'table_row'} %>

@@ -26,21 +26,28 @@ class QuestionsController < ApplicationController
     
     def create
         @question = Question.new(question_params)
+        @category = Category.find(params[:category_id])
         
         if @question.save
             redirect_to category_question_path(@question.category_id, @question)
         else
-            render 'questions/new'
+            respond_to do |format|
+                format.html { render :template => "questions/new" }
+            end
         end
     end
     
     def update
         @question = Question.find(params[:id])
-        
+        @category = Category.find(params[:category_id])
+
         if @question.update(question_params)
             redirect_to category_question_path(@question.category_id, @question)
         else
-            render 'edit'
+            respond_to do |format|
+                format.html { render :template => "questions/edit" }
+            end
+            
         end
     end
     

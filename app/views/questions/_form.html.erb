@@ -19,7 +19,7 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :category_id, class: 'control-label'%>	
-		<%= f.select(:category_id, options_from_collection_for_select(Category.all, :id, :categoryBody) )%>
+		<%= f.select(:category_id, options_from_collection_for_select(Category.all, :id, :categoryBody , :selected => @category.id))%>
 	</p>
 	</div>
 
@@ -41,7 +41,11 @@
 			</thead>
 			<tbody id="answer_table">
 				<%= f.fields_for :answers do |answer| %>
-					<%= render 'answer_fields', f: answer %>
+					
+							<%= render 'answer_fields', f: answer %>
+
+
+						
 				<% end %>
 			</tbody>
 		</table>
