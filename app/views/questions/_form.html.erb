@@ -19,7 +19,8 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :category_id, class: 'control-label'%>	
-		<%= f.select(:category_id, options_from_collection_for_select(Category.all, :id, :categoryBody , :selected => @category.id))%>
+		<%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :categoryBody , {:selected => @category.id})%>
+
 	</p>
 	</div>
 

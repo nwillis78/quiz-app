@@ -16,17 +16,23 @@ class QuestionsController < ApplicationController
     
     def new
         @question = Question.new
-        @category = Category.first
+        if @question.category_id
+            @category = Category.find(@question.category_id)
+        else
+            @category = Category.first
+        end
+        
+        
     end
     
     def edit
         @question = Question.find(params[:id])
-        @category = @question.category
+        @category = Category.find(@question.category_id)
     end
     
     def create
         @question = Question.new(question_params)
-        @category = Category.find(params[:category_id])
+        @category = Category.find(@question.category_id)
         
         if @question.save
             redirect_to category_question_path(@question.category_id, @question)
@@ -39,7 +45,12 @@ class QuestionsController < ApplicationController
     
     def update
         @question = Question.find(params[:id])
-        @category = Category.find(params[:category_id])
+        #use the special question_params_no_answers private method to create a dummy question using
+        #the fields from the form. This method is used as appose to the standard question_params
+        #because we do not need the answer data here - this question is only created to obtain the 
+        #category id
+        @question_edit = Question.new(question_params_no_answers)
+        @category = Category.find(@question_edit.category_id)
 
         if @question.update(question_params)
             redirect_to category_question_path(@question.category_id, @question)
@@ -75,6 +86,8 @@ class QuestionsController < ApplicationController
             params.require(:question).permit(:category_id, :body, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
         end
 
-       
+        def question_params_no_answers
+            params.require(:question).permit(:category_id, :body)
+        end
     
 end
