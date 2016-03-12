@@ -1,0 +1,10 @@
+<div class="nested-fields link-fields">
+<div id="question_from_list">
+<%= f.select :question_category, options_for_select(@categories.collect { |category|
+	    [category.categoryBody.titleize, category.id] }, 1), {}, { id: 'categories_select' } %>
+<%= f.select :question_id, options_for_select(@questions.collect { |question|
+	    [question.body, question.id] }, 0), {}, { id: 'questions_select' } %>
+<%= link_to_add_association 'or create new question', f, :question %>
+<%= link_to_remove_association "Remove question", f %>
+</div>
+</div>

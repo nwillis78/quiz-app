@@ -12,3 +12,14 @@ $ ->
         console.log("AJAX Error: #{textStatus}")
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic question select OK!")
+
+$('#questions a.add_fields').data('association-insertion-position', 'before').data 'association-insertion-node', 'this'
+$('#questions').on 'cocoon:after-insert', ->
+  $('.link-fields a.add_fields').data('association-insertion-position', 'before').data 'association-insertion-node', 'this'
+  $('.link-fields').on 'cocoon:after-insert', ->
+    $(this).children('#question_from_list').remove()
+    $(this).children('a.add_fields').hide()
+    return
+  return
+
+

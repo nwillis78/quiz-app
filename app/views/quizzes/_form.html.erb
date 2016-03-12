@@ -36,16 +36,33 @@
 	</div>
 
 	<h2>Questions</h2>
+
 	<p>Select a question from the question bank and add it to this quiz</p>
-	<%= form_for :links, html: {method: "get"} do |f| %>
 
-	  <%= f.select :category_id, options_for_select(@categories.collect { |category|
-	    [category.categoryBody.titleize, category.id] }, 1), {}, { id: 'categories_select' } %>
+	<div id="questions">
+	<%= link_to_add_association 'Add question', f, :links, :class => "button" %>
 
-	  <%= f.select :question_id, options_for_select(@questions.collect { |question|
-	    [question.body, question.id] }, 0), {}, { id: 'questions_select' } %>
+  	<%= f.fields_for :links do |link| %>
+  	<% render 'link_fields', f: link %>
+  	<% end %> 
+	</div>
 
-	<% end %>
+	<br>
+	<fieldset id = "quiz-questions">
+		<table class = "table">
+			<thead>
+				<tr>
+					<th>Category</th>
+					<th>Question</th>
+					<th>Answers</th>
+				</tr>
+			</thead>
+			<tbody id = "question_table">
+			</tbody>
+		</table>
+
+		
+	</fieldset>
 
     <br><br>
 

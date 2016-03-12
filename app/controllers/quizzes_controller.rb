@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
-    
+    helper_method :get_selected_question
+
     def index
         @quizzes = Quiz.all
     end
@@ -12,6 +13,7 @@ class QuizzesController < ApplicationController
         @quiz = Quiz.new
         @categories = Category.all
         @questions = Question.where("category_id = ?", Category.first.id)
+        @link = Link.new
     end
     
     def edit
@@ -44,10 +46,18 @@ class QuizzesController < ApplicationController
         redirect_to quizzes_path
     end
 
+    def get_selected_question
+        
+    end
+
+
+
     
     private
         def quiz_params
-            params.require(:quiz).permit(:title, :description, :instructions)
+            params.require(:quiz).permit(:title, :description, 
+                :instructions, links_attributes: [:quiz_id, :question_id], 
+                questions_attributes: [:category_id, :body])
         end
     
 end
