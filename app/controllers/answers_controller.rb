@@ -1,4 +1,7 @@
 class AnswersController < ApplicationController
+    def show
+    end
+
     def new
         question = @answer.build_profile
     end
@@ -14,6 +17,7 @@ class AnswersController < ApplicationController
     end
     
     def update
+        
     end
     
     def destroy
@@ -22,6 +26,13 @@ class AnswersController < ApplicationController
         @answer.destroy
         redirect_to question_path(@question)
     end
+
+    def update_answers
+        @answers = Answer.where("question_id = ?", params[:question_id])
+        respond_to do |format|
+          format.js
+        end
+    end  
     
     private
         def answer_params

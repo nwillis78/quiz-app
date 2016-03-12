@@ -13,6 +13,27 @@ $ ->
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic question select OK!")
 
+  #update the answers when either the categories or question drop down is selected
+  $(document).on 'change', '#questions_select', (evt) ->
+    $.ajax '../../answers/update_answers',
+      type: 'GET'
+      dataType: 'script'
+      data: {"question_id": $("#questions_select option:selected").val()}
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+      success: (data, textStatus, jqXHR) ->
+        console.log("Dynamic question select OK!")
+
+  $(document).on 'change', '#categories_select', (evt) ->
+    $.ajax '../../answers/update_answers',
+      type: 'GET'
+      dataType: 'script'
+      data: {"question_id": $("#questions_select option:selected").val()}
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+      success: (data, textStatus, jqXHR) ->
+        console.log("Dynamic question select OK!")
+
 $('#questions a.add_fields').data('association-insertion-position', 'before').data 'association-insertion-node', 'this'
 $('#questions').on 'cocoon:after-insert', ->
   $('.link-fields a.add_fields').data('association-insertion-position', 'before').data 'association-insertion-node', 'this'

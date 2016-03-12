@@ -39,30 +39,37 @@
 
 	<p>Select a question from the question bank and add it to this quiz</p>
 
+	
+
+	<br>
+	<table class = "table">
+		<thead>
+			<tr>
+				<th>Category</th>
+				<th>Question</th>
+				<th>Answers</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id = "question_table">
+		</tbody>
+	</table>
+
+	<div class="links">
+		<div id="button_text">
+          	<button type="button" class="btn btn-primary">
+          		<%= link_to_add_association f, :links, :"data-association-insertion-node" => "tbody#question_table", :"data-association-insertion-method" => "append", :class => "button" do %>Add question<% end %>
+          	</button>
+        </div>
+	</div>
+
 	<div id="questions">
-	<%= link_to_add_association 'Add question', f, :links, :class => "button" %>
 
   	<%= f.fields_for :links do |link| %>
   	<% render 'link_fields', f: link %>
   	<% end %> 
 	</div>
 
-	<br>
-	<fieldset id = "quiz-questions">
-		<table class = "table">
-			<thead>
-				<tr>
-					<th>Category</th>
-					<th>Question</th>
-					<th>Answers</th>
-				</tr>
-			</thead>
-			<tbody id = "question_table">
-			</tbody>
-		</table>
-
-		
-	</fieldset>
 
     <br><br>
 

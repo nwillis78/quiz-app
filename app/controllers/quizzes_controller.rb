@@ -11,14 +11,13 @@ class QuizzesController < ApplicationController
     
     def new
         @quiz = Quiz.new
-        @categories = Category.all
         @questions = Question.where("category_id = ?", Category.first.id)
+        @answers = Answer.where("question_id = ?", @questions.first.id)
         @link = Link.new
     end
     
     def edit
         @quiz = Quiz.find(params[:id])
-        @categories = Category.all
         @questions = Question.where("category_id = ?", Category.first.id)
     end
     
@@ -45,12 +44,6 @@ class QuizzesController < ApplicationController
         
         redirect_to quizzes_path
     end
-
-    def get_selected_question
-        
-    end
-
-
 
     
     private

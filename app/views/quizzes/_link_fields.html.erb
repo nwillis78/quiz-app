@@ -1,10 +1,42 @@
-<div class="nested-fields link-fields">
-<div id="question_from_list">
-<%= f.select :question_category, options_for_select(@categories.collect { |category|
-	    [category.categoryBody.titleize, category.id] }, 1), {}, { id: 'categories_select' } %>
-<%= f.select :question_id, options_for_select(@questions.collect { |question|
-	    [question.body, question.id] }, 0), {}, { id: 'questions_select' } %>
-<%= link_to_add_association 'or create new question', f, :question %>
-<%= link_to_remove_association "Remove question", f %>
-</div>
-</div>
+<tr class = "table_row" >
+
+<div class="nested-fields link-fields" >
+	<div id="question_from_list">
+	
+		<td class="col-sm-1">	
+			<div class = "field">
+				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
+	    		[category.categoryBody.titleize, category.id] }, 1), {}, { id: 'categories_select' } %>
+			</div>
+		</td>
+		<td class="col-sm-3">
+			<div class = "field">
+			<%= params[:question_category].inspect() %>
+				<%= f.select :question_id, options_for_select(@questions.collect { |question|
+	    		[question.body, question.id] }, 0), {}, { id: 'questions_select' } %>
+			</div>
+		</td>
+		<td class="col-sm-6">
+		<div id="displayed_answers">
+			<% @answers.each do |answer| %>
+			<p>
+				<strong>Answer:</strong> <%= answer.answerString %>
+				<strong>isCorrect:</strong> <%= answer.isCorrect %>
+			</p>
+			<% end %>
+			</div>
+
+			
+		</td>
+		<td class="col-sm-2">
+			<div id="button_text">
+				<button type = "button" class="btn btn-primary">
+				<%= link_to_add_association 'or create new question', f, :question, {wrapper_class: 'table_row'}  %>
+				</button>
+				<button type="button" class="btn btn-danger">
+				<%= link_to_remove_association "Remove question", f, {wrapper_class: 'table_row'} %>
+				</button>
+			</div>
+		</td>
+	</div>
+</div></tr>

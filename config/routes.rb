@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'quizzes/get_selected_question'
   
   get 'questions/update_questions', as: 'update_questions'
+  get 'answers/update_answers', as: 'update_answers'
   #get 'questions/update_questions?category_id' => 'questions#update_questions', as: 'update_questions', :format => :json
   get 'questions/show_questions'
   
