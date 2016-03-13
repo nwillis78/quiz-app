@@ -71,9 +71,11 @@ class QuestionsController < ApplicationController
     end 
 
     def update_questions
-        @questions = Question.where("category_id = ?", params[:category_id])
+        @questions = Question.where("category_id = ?", params[:ajax_category_id])
+        @question_no = params[:question_no]
+
         respond_to do |format|
-          format.js
+          format.js 
         end
     end  
 

@@ -14,6 +14,7 @@ class QuizzesController < ApplicationController
         @questions = Question.where("category_id = ?", Category.first.id)
         @answers = Answer.where("question_id = ?", @questions.first.id)
         @link = Link.new
+        @no_questions = 0
     end
     
     def edit

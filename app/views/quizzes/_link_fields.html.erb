@@ -2,18 +2,20 @@
 
 <div class="nested-fields link-fields" >
 	<div id="question_from_list">
+
+		
 	
 		<td class="col-sm-1">	
 			<div class = "field">
+			
 				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
-	    		[category.categoryBody.titleize, category.id] }, 1), {}, { id: 'categories_select' } %>
+	    		[category.categoryBody.titleize, category.id] }, 1), {}, { id: "categories_select_1" } %>
 			</div>
 		</td>
 		<td class="col-sm-3">
 			<div class = "field">
-			<%= params[:question_category].inspect() %>
 				<%= f.select :question_id, options_for_select(@questions.collect { |question|
-	    		[question.body, question.id] }, 0), {}, { id: 'questions_select' } %>
+	    		[question.body, question.id] }, 0), {}, { id: 'questions_select_1' } %>
 			</div>
 		</td>
 		<td class="col-sm-6">
@@ -25,7 +27,6 @@
 			</p>
 			<% end %>
 			</div>
-
 			
 		</td>
 		<td class="col-sm-2">
@@ -40,3 +41,4 @@
 		</td>
 	</div>
 </div></tr>
+

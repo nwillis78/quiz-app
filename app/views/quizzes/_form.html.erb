@@ -37,9 +37,8 @@
 
 	<h2>Questions</h2>
 
-	<p>Select a question from the question bank and add it to this quiz</p>
-
-	
+	<p>Add questions to the quiz using the button below. You can add questions directly from the question
+	bank or create a new question.</p>
 
 	<br>
 	<table class = "table">
@@ -63,7 +62,10 @@
         </div>
 	</div>
 
+
+
 	<div id="questions">
+
 
   	<%= f.fields_for :links do |link| %>
   	<% render 'link_fields', f: link %>
