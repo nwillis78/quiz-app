@@ -28,7 +28,9 @@ class AnswersController < ApplicationController
     end
 
     def update_answers
-        @answers = Answer.where("question_id = ?", params[:question_id])
+        @answers = Answer.where("question_id = ?", params[:ajax_question_id])
+        @question_no = params[:question_no]
+        
         respond_to do |format|
           format.js
         end

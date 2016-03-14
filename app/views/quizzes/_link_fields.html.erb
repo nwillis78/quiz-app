@@ -1,5 +1,5 @@
 <tr class = "table_row" >
-
+<div id = "new_fields">
 <div class="nested-fields link-fields" >
 	<div id="question_from_list">
 
@@ -7,7 +7,7 @@
 	
 		<td class="col-sm-1">	
 			<div class = "field">
-			
+				<%= @id = f.object.id %>
 				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
 	    		[category.categoryBody.titleize, category.id] }, 1), {}, { id: "categories_select_1" } %>
 			</div>
@@ -39,6 +39,7 @@
 				</button>
 			</div>
 		</td>
+	</div>
 	</div>
 </div></tr>
 

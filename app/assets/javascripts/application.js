@@ -16,7 +16,11 @@
 //= require turbolinks
 //= require cocoon
 //= require quizzes
+//= require quizzes.js
 //= require_tree .
+//= require_self
+
+
 
 
 
