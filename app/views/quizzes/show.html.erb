@@ -17,9 +17,15 @@
 <h4>Questions</h4>
 <% @quiz.questions.each do |question| %>
 	<p>
-		<strong>Category:</strong> <%= question.category_id %>
+		<strong>Category:</strong> <%= Category.find(question.category_id).categoryBody %>
 		<strong>Body:</strong> <%= question.body %>
 	</p>
+
+	<% question.answers.each do |answer| %>
+		<p>
+			<strong>Answer:</strong><%= answer.answerString %>    <stong>isCorrect:</stong><%= answer.isCorrect %>
+		</p>
+	<% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_quiz_path(@quiz) %>
