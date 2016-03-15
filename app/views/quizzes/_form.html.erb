@@ -51,14 +51,15 @@
 			</tr>
 		</thead>
 		<tbody id = "question_table">
-		</tbody>
-	</table>
-
-	<div id="questions">
+		<div id="questions">
 		<%= f.fields_for :links do |link| %>
   		<% render 'link_fields', f: link %>
   		<% end %> 
 	</div>
+		</tbody>
+	</table>
+
+	
 
 
 	<div class="links">

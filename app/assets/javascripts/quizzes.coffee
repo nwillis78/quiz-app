@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  #When the value of category select is changed then send the category id and the id of the select box to the 
+  #update_questions method so that the questions select can be updated. If this is successfull then also update
+  #the displayed answers by sending the new value in the questions select to the update answers
   $(document).on 'change', '[id^=categories_select]', (evt) ->
     console.log(evt.target.id.slice(17))
     $.ajax '../../questions/update_questions',
@@ -22,7 +25,7 @@ $ ->
           success: (data, textStatus, jqXHR) ->
             console.log("Dynamic question select OK! c")
 
-  #update the answers when either the categories or question drop down is selected
+  #update the answers when the question drop down is selected
   $(document).on 'change', '[id^=questions_select]', (evt) ->
     $.ajax '../../answers/update_answers',
       type: 'GET'
@@ -34,8 +37,8 @@ $ ->
         console.log("Dynamic question select OK! b")
 
 
-
-
+#called when link_to_add_association is pressed. gets the category question and answer bits and gives them an id that will
+#be a random number. This is so that dependent drop downs can work independently
 $(document).ready ->
   $('tbody#question_table a.add_fields').data('association-insertion-position', 'before').data 'association-insertion-node', 'this'
   $('tbody#question_table').on 'cocoon:after-insert', ->

@@ -1,25 +1,61 @@
 <tr class = "table_row" >
-<div id = "new_fields">
-<div class="nested-fields link-fields" >
-	<div id="question_from_list">
 
-		
-	
+<div class="nested-fields link-fields" >
+<div id = "new_fields">
+	<div id="question_from_list">
+	<!-- perform this check first, if on the edit page existing questions will have f.object.id and
+	so should be displayed in this partial, if not then this will be a new question so set all the variables
+	to those that should be displayed for a new question-->
+	<% if f.object.id %>
+		<% @link = Link.find(f.object.id) %>
+		<% @catid = @link.question_category %>
+		<% @quesid = @link.question_id %>
+		<% @questions = Question.where('category_id = ?', @catid) %>
+		<% @answers = Answer.where('question_id = ?', @quesid) %>
+	<% else %>
+		<% @link = Link.new %>
+		<% @catid = 0 %>
+		<% @quesid = 0 %>
+		<% @questions = Question.where("category_id = ?", Category.first.id) %>
+		<% @answers = Answer.where("question_id = ?", @questions.first.id) %>
+	<% end %>
+
 		<td class="col-sm-1">	
 			<div class = "field">
-				<%= @id = f.object.id %>
+			<!-- for this field and future fields, if on edit page make sure the drop down has an id that is the
+			Link id, this way it will be unique. If not then leave it as normal and it will be changed by the ajax
+			when link_to_add_association is pressed -->
+			<% if f.object.id %>
 				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
-	    		[category.categoryBody.titleize, category.id] }, 1), {}, { id: "categories_select_1" } %>
+	    		[category.categoryBody, category.id] }, @catid), {}, { id: "categories_select_#{f.object.id}" } %>
+			<% else %>
+				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
+	    		[category.categoryBody, category.id] }, @catid), {}, { id: "categories_select_1" } %>
+			<% end %>
+				
 			</div>
 		</td>
 		<td class="col-sm-3">
 			<div class = "field">
+			<% if f.object.id %>
 				<%= f.select :question_id, options_for_select(@questions.collect { |question|
-	    		[question.body, question.id] }, 0), {}, { id: 'questions_select_1' } %>
+	    		[question.body, question.id] }, @quesid), {}, { id: "questions_select_#{f.object.id}" } %>
+			<% else %>
+				<%= f.select :question_id, options_for_select(@questions.collect { |question|
+	    		[question.body, question.id] }, @quesid), {}, { id: "questions_select_1" } %>
+			<% end %>
+				
 			</div>
 		</td>
 		<td class="col-sm-6">
-		<div id="displayed_answers">
+
+		<% if f.object.id %>
+			<% @field_id = "displayed_answers_#{f.object.id}" %>
+			<div id= "<%= @field_id %>">
+		<% else %>
+			<div id="displayed_answers">
+		<% end %>
+		
 			<% @answers.each do |answer| %>
 			<p>
 				<strong>Answer:</strong> <%= answer.answerString %>
