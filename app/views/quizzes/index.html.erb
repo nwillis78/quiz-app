@@ -12,6 +12,7 @@
 		<th>Title</th>
 		<th>Description</th>
 		<th>Instructions</th>
+		<th>No. Questions</th>
 	</tr>
 
 	<% @quizzes.each do |quiz| %>
@@ -19,6 +20,7 @@
 			<td><%= quiz.title %></td>
 			<td><%= quiz.description %></td>
 			<td><%= quiz.instructions %></td>
+			<td><%= quiz.links.length %></td>
 			<td><button type="button" class="btn btn-default"><%= link_to 'Show', quiz_path(quiz) %></button></td>
 
 			<td><button type= "button" class= "btn btn-default"><%= link_to 'Edit', edit_quiz_path(quiz)%></button></td>

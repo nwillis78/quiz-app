@@ -1,21 +1,29 @@
-<h2>Question Info</h2>
-<p>
-	<strong>Category:</strong>
-	<%= @category %>
-</p>
-
-<p>
-	<strong>Question Body:</strong>
-	<%= @question.body %>
-</p>
-
-<h4>Answers</h4>
-<% @question.answers.each do |answer| %>
-	<p>
-		<strong>Answer:</strong> <%= answer.answerString %>
-		<strong>isCorrect:</strong> <%= answer.isCorrect %>
-	</p>
-<% end %>
+<div class="panel panel-default">
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Question Info</h1>
+  	</div>
+  	<div class="panel-body">
+    	<p>
+			<strong>Category:</strong> <%= @category %>
+		</p>
+		<p>
+			<%= @question.body %>
+		</p>
+  	</div>
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Answers</h1>
+  	</div>
+  	<ul class="list-group">
+  	
+    <% @question.answers.each do |answer| %>
+    	<% if answer.isCorrect %>
+			<li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
+		<% else %>
+			<li class="list-group-item list-group-item-danger"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
+		<% end %>
+	<% end %>
+  </ul>
+</div>
 
 
 <%= link_to 'Edit', edit_category_question_path(@question, @question.id) %>
