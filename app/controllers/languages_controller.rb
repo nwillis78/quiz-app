@@ -15,6 +15,7 @@ class LanguagesController < ApplicationController
 
 	def new
 		@language = Language.new
+
 		if @language.direction_id
             @direction = Direction.find(@language.direction_id)
         else
@@ -29,6 +30,7 @@ class LanguagesController < ApplicationController
 
 	def create
   		@language = Language.new(language_params)
+      @direction = Direction.find(@language.direction_id)
  
   		if @language.save
     		redirect_to @language
@@ -39,6 +41,7 @@ class LanguagesController < ApplicationController
  
 	def update
   		@language = Language.find(params[:id])
+      @direction = Direction.find(@language.direction_id)
  
   		if @language.update(language_params)
     		redirect_to @language
