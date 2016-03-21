@@ -6,7 +6,8 @@ class Quiz < ActiveRecord::Base
 	accepts_nested_attributes_for :questions
     
     validates :title, presence: true,
-    length: { minimum: 5 }
+    length: { minimum: 3 }
+
 
     def getNoQuestions
 	    questions.length

@@ -1,12 +1,17 @@
-<p>
-  <strong>Name:</strong>
-  <%= @language.languageName %>
-</p>
+<%= link_to languages_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+<br><br>
+<div class="panel panel-default">
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Language Info</h1>
+  	</div>
+  	<div class="panel-body">
+		<%= @language.languageName %><br>
+		Direction:<%= @direction %>
+  	</div>
+</div>
 
-<p>
-  <strong>Direction:</strong>
-  <%= @direction %>
-</p>
 
-<%= link_to 'Edit', edit_language_path(@language) %> 
-<%= link_to 'Back', languages_path %>
+<button type = "button" class="btn btn-default">
+<%= link_to 'Edit', edit_language_path(@language) %></button>

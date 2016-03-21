@@ -1,3 +1,7 @@
+<%= link_to categories_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+<br><br>
 <div class="panel panel-default">
   	<div class="panel-heading">
    		<h1 class="panel-title">Category Info</h1>
@@ -7,5 +11,5 @@
   	</div>
 </div>
 
-<%= link_to 'Edit', edit_category_path(@category) %>
-<%= link_to 'Back', categories_path %>
+<button type = "button" class="btn btn-default">
+<%= link_to 'Edit', edit_category_path(@category) %></button>

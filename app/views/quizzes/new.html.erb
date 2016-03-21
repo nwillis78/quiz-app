@@ -1,10 +1,13 @@
 <%= javascript_include_tag :quizzes%>
 
+<%= link_to quizzes_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+
+
 <h1>New Quiz</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', quizzes_path %>
 
 
 	
