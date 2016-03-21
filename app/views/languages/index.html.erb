@@ -1,0 +1,33 @@
+<h1>Listing Languages</h1>
+
+<div id="button_text">
+  <button type = "button" class="btn btn-primary">
+  <%= link_to 'New Language', new_language_path %></button>
+</div> 
+
+<br>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Direction</th>
+  </tr>
+
+  <% @languages.each do |language| %>
+    <tr>
+      <td><%= language.languageName %></td>
+      <td><%= language.direction.directionName %></td>
+      
+      <td><button type="button" class="btn btn-default"><%= link_to 'Show', language_path(language) %></button></td>
+
+      <td><button type= "button" class= "btn btn-default"><%= link_to 'Edit', edit_language_path(language)%></button></td>
+      
+      <td><div id="button_text">
+        <button type="button" class="btn btn-danger"><%= link_to 'Destroy', language_path(language),
+      method: :delete, 
+      data: {confirm: 'Are you sure?'} %></button>
+        </div></td>
+    </tr>
+  <% end %>
+</table>
+

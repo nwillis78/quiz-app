@@ -1,64 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
-
-<header class="navbar  navbar-default">
-    <div class="navbar-class">
-      <div class="container">
-      <!-- Collect the nav links, forms, and other content for toggling -->
-
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">HOME</a></li>
-          <li><%= link_to 'Quizzes', controller: 'quizzes'%></li>
-          <li><%= link_to 'Question Bank', category_questions_path(Question.all)%></li>
-          <li><%= link_to 'Question Categories', controller: 'categories'%></li>
-        </ul>
-
-
-      </div>
-    </div>
-  </header>
-
-
-
-	<h1>Quiz App</h1> 
-
-	<div class="panel panel-info">
-  		<div class="panel-heading">
-    		<h3 class="panel-title">Quizzes</h3>
-  		</div>
-
-  		<div class="panel-body">
-    		See quizzes that are available.<br><br>
-    		<div id="button_text">
-    		<button type="button" class="btn btn-primary"><%= link_to 'My Quizzes', controller: 'quizzes'%></button>
-    		</div>
-  		</div>
-	</div>
-
-  <div class="panel panel-success">
-        <div class="panel-heading">
-          <h3 class="panel-title">Question Bank</h3>
-        </div>
-
-        <div class="panel-body">
-          See all of the questions that are in your bank.<br><br>
-          <div id="button_text">
-          <button type="button" class="btn btn-success"><%= link_to 'My Question Bank', category_questions_path(Question.all)%></button>
-          </div>
-        </div>
-  </div>
-
-  <div class="panel panel-warning">
-        <div class="panel-heading">
-          <h3 class="panel-title">Question Categories</h3>
-        </div>
-
-        <div class="panel-body">
-          See all of the categories that are available for questions<br><br>
-          <div id="button_text">
-          <button type="button" class="btn btn-warning"><%= link_to 'My Question Categories', controller: 'categories'%></button>
-          </div>
-        </div>
-  </div>
+  <h1>Online Quiz App</h1>
+	<h2>This is the welcome page</h2>
 
 </html>

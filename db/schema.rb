@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160312151836) do
+ActiveRecord::Schema.define(version: 20160321120321) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -28,6 +28,22 @@ ActiveRecord::Schema.define(version: 20160312151836) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "directions", force: :cascade do |t|
+    t.string   "directionName"
+    t.string   "directionCode"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "languageName"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "direction_id"
+  end
+
+  add_index "languages", ["direction_id"], name: "index_languages_on_direction_id"
 
   create_table "links", force: :cascade do |t|
     t.integer  "quiz_id"

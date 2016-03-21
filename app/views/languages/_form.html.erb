@@ -1,0 +1,26 @@
+<%= form_for @language do |f| %>
+  <div class="field form-group">
+  <p>
+    <%= f.label :languageName %><br>
+    <%= f.text_field :languageName %>
+  </p>
+  </div>
+
+  <div class="field form-group">
+  <p>
+    <%= f.label :direction_id, class: 'control-label'%> 
+    <%= f.select :direction_id, options_from_collection_for_select(Direction.all, :id, :directionName , {:selected => @direction.id})%>
+  </p>
+  </div>
+
+  <br><br>
+ 
+   <div class="actions form-group" id="button_text">
+    <p>
+    <%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
+    Submit
+    <% end %>
+    </p>
+    </div>
+ 
+<% end %>

@@ -18,6 +18,22 @@
   </head>
   <body>
     
+    <header class="navbar  navbar-default">
+    <div class="navbar-class">
+      <div class="container">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <ul class="nav navbar-nav">
+          <li class="active"><%=awesome_link 'fa fa-home fa-lg', root_path%></li>
+          <li><%= link_to 'Quizzes', controller: 'quizzes'%></li>
+          <li><%= link_to 'Question Bank', category_questions_path(Question.all)%></li>
+          <li><%= link_to 'Question Categories', controller: 'categories'%></li>
+          <li><%= link_to 'Languages', controller: 'languages'%></li>
+        </ul>
+
+      </div>
+    </div>
+    </header>
     
 
     <%= yield %>

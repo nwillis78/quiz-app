@@ -39,6 +39,9 @@ gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'gon'
 
+gem "font-awesome-rails"
+gem 'awesome_link'
+
 
 
 

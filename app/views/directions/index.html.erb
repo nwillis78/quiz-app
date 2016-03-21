@@ -1,0 +1,15 @@
+<h1>Listing directions</h1>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Code</th>
+  </tr>
+ 
+  <% @directions.each do |direction| %>
+    <tr>
+      <td><%= direction.directionName %></td>
+      <td><%= direction.directionCode %></td>
+    </tr>
+  <% end %>
+</table>

@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   end
   
   resources :links
+  
+  resources :languages do
+      resources :directions
+  end
     
   get 'welcome/index'
   get 'quizzes/get_selected_question'

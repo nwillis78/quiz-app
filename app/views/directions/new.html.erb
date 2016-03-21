@@ -1,0 +1,17 @@
+<h1>New direction</h1>
+
+<%= form_for :direction, url: directions_path do |f| %>
+  <p>
+    <%= f.label :directionName %><br>
+    <%= f.text_field :directionName %>
+  </p>
+ 
+  <p>
+    <%= f.label :directionCode %><br>
+    <%= f.text_field :directionCode %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
