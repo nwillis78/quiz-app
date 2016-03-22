@@ -1,4 +1,6 @@
 class DirectionsController < ApplicationController
+  before_filter :authenticate_user!
+  
 	def index
     	@directions = Direction.all
   	end

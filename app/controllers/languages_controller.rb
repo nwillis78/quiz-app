@@ -1,4 +1,6 @@
 class LanguagesController < ApplicationController
+  before_filter :authenticate_user!
+  
 	def index
 		@languages = Language.all
 	end

@@ -42,6 +42,8 @@ gem 'gon'
 gem "font-awesome-rails"
 gem 'awesome_link'
 
+gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatable'
+gem "epi_cas", git: "https://git.shefcompsci.org.uk/gems/epi_cas.git"
 
 
 

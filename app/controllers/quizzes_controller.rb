@@ -1,5 +1,7 @@
 class QuizzesController < ApplicationController
+    before_filter :authenticate_user!
     helper_method :get_selected_question
+
 
     def index
         @quizzes = Quiz.all

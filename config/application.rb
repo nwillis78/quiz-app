@@ -8,6 +8,11 @@ Bundler.require(*Rails.groups)
 
 
 
+# Require gems used by epi_cas
+require 'devise'
+require 'devise_cas_authenticatable'
+require "devise_ldap_authenticatable"
+require 'sheffield_ldap_lookup'
 module Quizapp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

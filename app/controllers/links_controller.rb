@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+	before_filter :authenticate_user!
+	
 	def create
 		@link = Link.new(link_params)
         @link.save

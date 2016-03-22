@@ -17,25 +17,33 @@
     <![endif]-->
   </head>
   <body>
-    
-    <header class="navbar  navbar-default">
-    <div class="navbar-class">
-      <div class="container">
-      <!-- Collect the nav links, forms, and other content for toggling -->
 
-        <ul class="nav navbar-nav">
-          <li class="active"><%=awesome_link 'fa fa-home fa-lg', root_path%></li>
-          <li><%= link_to 'Quizzes', controller: 'quizzes'%></li>
-          <li><%= link_to 'Question Bank', category_questions_path(Question.all)%></li>
-          <li><%= link_to 'Question Categories', controller: 'categories'%></li>
-          <li><%= link_to 'Languages', controller: 'languages'%></li>
-        </ul>
-
+    <% if user_signed_in? %>
+      <div style="text-align:right;">
+        <%= current_user.username %>
+        <%= link_to destroy_user_session_path, :method => :delete, :class => "fa fa-sign-out" do %>
+          Sign out
+        <% end %>
       </div>
-    </div>
-    </header>
-    
+      
 
+      <header class="navbar  navbar-default">
+        <div class="navbar-class">
+          <div class="container">
+          <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <ul class="nav navbar-nav">
+              <li class="active"><%=awesome_link 'fa fa-home fa-lg', root_path%></li>
+              <li><%= link_to 'Quizzes', quizzes_path%></li>
+              <li><%= link_to 'Question Bank', category_questions_path(Question.all)%></li>
+              <li><%= link_to 'Question Categories', categories_path %></li>
+              <li><%= link_to 'Languages', languages_path %></li>
+            </ul>
+
+          </div>
+        </div>
+        </header>
+    <% end %>
     <%= yield %>
 
 
