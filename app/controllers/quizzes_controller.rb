@@ -10,6 +10,12 @@ class QuizzesController < ApplicationController
     
     def show
         @quiz = Quiz.find(params[:id])
+
+        if @quiz.language != nil
+            @language = @quiz.language.languageName
+        else 
+            @language = 'Undefined'
+        end
     end
     
     def new
@@ -18,6 +24,12 @@ class QuizzesController < ApplicationController
         @answers = Answer.where("question_id = ?", @questions.first.id)
         @link = Link.new
         @no_questions = 0
+
+        if @quiz.language_id
+            @language = Language.find(@quiz.language_id)
+        else
+            @language = Language.first
+        end
     end
     
     def edit
@@ -30,6 +42,7 @@ class QuizzesController < ApplicationController
             @link = nil
         end
         @no_questions = 0
+        @language = Language.find(@quiz.language_id)
     end
     
     def create
@@ -61,7 +74,7 @@ class QuizzesController < ApplicationController
     private
         def quiz_params
             params.require(:quiz).permit(:title, :description, 
-                :instructions, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
+                :instructions, :language_id, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
                 questions_attributes: [:category_id, :body])
         end
     

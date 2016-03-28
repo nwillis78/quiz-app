@@ -2,6 +2,7 @@ class Quiz < ActiveRecord::Base
 	has_many :links
 	has_many :questions, through: :links
 	belongs_to :user
+	belongs_to :language
 
 	accepts_nested_attributes_for :links, :allow_destroy => true
 	accepts_nested_attributes_for :questions

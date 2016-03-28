@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
 
     belongs_to :category
     belongs_to :user
+    belongs_to :language
 
     has_many :links
     has_many :quizzes, through: :links

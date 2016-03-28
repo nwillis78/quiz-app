@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328122246) do
+ActiveRecord::Schema.define(version: 20160328142248) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20160328122246) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "direction_id"
+    t.integer  "user_id"
   end
 
   add_index "languages", ["direction_id"], name: "index_languages_on_direction_id"
+  add_index "languages", ["user_id"], name: "index_languages_on_user_id"
 
   create_table "links", force: :cascade do |t|
     t.integer  "quiz_id"
@@ -65,9 +67,11 @@ ActiveRecord::Schema.define(version: 20160328122246) do
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.integer  "user_id"
+    t.integer  "language_id"
   end
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id"
+  add_index "questions", ["language_id"], name: "index_questions_on_language_id"
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
   create_table "quizzes", force: :cascade do |t|
@@ -77,8 +81,10 @@ ActiveRecord::Schema.define(version: 20160328122246) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.integer  "language_id"
   end
 
+  add_index "quizzes", ["language_id"], name: "index_quizzes_on_language_id"
   add_index "quizzes", ["user_id"], name: "index_quizzes_on_user_id"
 
   create_table "users", force: :cascade do |t|

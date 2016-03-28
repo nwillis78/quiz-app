@@ -3,7 +3,7 @@ class LanguagesController < ApplicationController
   load_and_authorize_resource
   
 	def index
-		@languages = Language.all
+		@languages = Language.where("user_id = ?", current_user.id)
 	end
 
 	def show
@@ -34,6 +34,7 @@ class LanguagesController < ApplicationController
 	def create
   		@language = Language.new(language_params)
       @direction = Direction.find(@language.direction_id)
+      @language.user = current_user
  
   		if @language.save
     		redirect_to @language
@@ -62,6 +63,6 @@ class LanguagesController < ApplicationController
 
 	private
   		def language_params
-    		params.require(:language).permit(:languageName, :direction_id)
+    		params.require(:language).permit(:languageName, :direction_id, :user)
   		end
 end

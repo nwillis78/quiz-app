@@ -9,6 +9,7 @@
 
 <table class="table table-striped">
 	<tr>
+		<th>Language</th>
 		<th>Title</th>
 		<th>Description</th>
 		<th>Instructions</th>
@@ -17,6 +18,7 @@
 
 	<% @quizzes.each do |quiz| %>
 		<tr>
+			<td><%= quiz.language.languageName %></td>
 			<td><%= quiz.title %></td>
 			<td><%= quiz.description %></td>
 			<td><%= quiz.instructions %></td>

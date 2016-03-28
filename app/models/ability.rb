@@ -37,8 +37,10 @@ class Ability
     		quiz.try(:user) == user
   		end
 
+  		can :manage, Language 
+
     else
-      can :read, :all
+      #define what students can do
     end
   end
 end

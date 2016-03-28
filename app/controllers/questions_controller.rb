@@ -14,6 +14,12 @@ class QuestionsController < ApplicationController
         else 
             @category = 'Undefined'
         end
+
+        if @question.language != nil
+            @language = @question.language.languageName
+        else 
+            @language = 'Undefined'
+        end
     end
     
     def new
@@ -23,6 +29,11 @@ class QuestionsController < ApplicationController
         else
             @category = Category.first
         end
+        if @question.language_id
+            @language = Language.find(@question.language_id)
+        else
+            @language = Language.first
+        end
         
         
     end
@@ -30,6 +41,7 @@ class QuestionsController < ApplicationController
     def edit
         @question = Question.find(params[:id])
         @category = Category.find(@question.category_id)
+        @language = Language.find(@question.language_id)
     end
     
     def create
@@ -88,7 +100,7 @@ class QuestionsController < ApplicationController
     
     private
         def question_params
-            params.require(:question).permit(:category_id, :body, :user, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
+            params.require(:question).permit(:category_id, :language_id, :body, :user, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
         end
 
         def question_params_no_answers
