@@ -1,0 +1,21 @@
+
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>dn</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.role %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

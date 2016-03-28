@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
     
   mount EpiCas::Engine, at: "/"
+  
   devise_for :users
+  scope "/admin" do
+      resources :users
+  end
+  
+  
+  
   resources :quizzes
   
   resources :categories do

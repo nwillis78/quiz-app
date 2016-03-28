@@ -1,6 +1,7 @@
 class QuizzesController < ApplicationController
     before_filter :authenticate_user!
     helper_method :get_selected_question
+    load_and_authorize_resource
 
 
     def index
