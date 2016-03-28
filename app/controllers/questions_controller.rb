@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
     load_and_authorize_resource
     
     def index
-        @questions = Question.all
+        @questions = Question.where("user_id = ?", current_user.id)
     end
     
     def show
@@ -35,6 +35,7 @@ class QuestionsController < ApplicationController
     def create
         @question = Question.new(question_params)
         @category = Category.find(@question.category_id)
+        @question.user = current_user
         
         if @question.save
             redirect_to category_question_path(@question.category_id, @question)
@@ -87,7 +88,7 @@ class QuestionsController < ApplicationController
     
     private
         def question_params
-            params.require(:question).permit(:category_id, :body, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
+            params.require(:question).permit(:category_id, :body, :user, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
         end
 
         def question_params_no_answers

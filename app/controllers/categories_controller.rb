@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
     load_and_authorize_resource
     
 	def index
-        @categories = Category.all
+        @categories = Category.where("user_id = ?", current_user.id)
     end
     
     def show
@@ -20,6 +20,7 @@ class CategoriesController < ApplicationController
     
     def create
         @category = Category.new(category_params)
+        @category.user = current_user
         
         if @category.save
             redirect_to @category
@@ -49,7 +50,7 @@ class CategoriesController < ApplicationController
     
     private
         def category_params
-            params.require(:category).permit(:categoryBody)
+            params.require(:category).permit(:categoryBody, :user)
         end
 
        

@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
 
 
     def index
-        @quizzes = Quiz.all
+        @quizzes = Quiz.where("user_id = ?", current_user.id)
     end
     
     def show
@@ -34,6 +34,7 @@ class QuizzesController < ApplicationController
     
     def create
         @quiz = Quiz.new(quiz_params)
+        @quiz.user = current_user
         
         if @quiz.save
             redirect_to @quiz
@@ -60,7 +61,7 @@ class QuizzesController < ApplicationController
     private
         def quiz_params
             params.require(:quiz).permit(:title, :description, 
-                :instructions, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
+                :instructions, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
                 questions_attributes: [:category_id, :body])
         end
     

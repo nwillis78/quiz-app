@@ -3,7 +3,40 @@ class Ability
 
   def initialize(user)
     if user.staff?
-      can :manage, :all
+    	#staff should only be able to RUD their own stuff, they should be able to C
+  		can :read, Category do |category|
+    		category.try(:user) == user
+  		end
+  		can :create, Category
+  		can :update, Category do |category|
+    		category.try(:user) == user
+  		end
+  		can :destroy, Category do |category|
+    		category.try(:user) == user
+  		end
+
+  		can :read, Question do |question|
+    		question.try(:user) == user
+  		end
+  		can :create, Question
+  		can :update, Question do |question|
+    		question.try(:user) == user
+  		end
+  		can :destroy, Question do |question|
+    		question.try(:user) == user
+  		end
+
+  		can :read, Quiz do |quiz|
+    		quiz.try(:user) == user
+  		end
+  		can :create, Quiz
+  		can :update, Quiz do |quiz|
+    		quiz.try(:user) == user
+  		end
+  		can :destroy, Quiz do |quiz|
+    		quiz.try(:user) == user
+  		end
+
     else
       can :read, :all
     end

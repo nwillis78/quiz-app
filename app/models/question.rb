@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
     require_dependency 'lib/association_count_validator.rb'
 
     belongs_to :category
+    belongs_to :user
 
     has_many :links
     has_many :quizzes, through: :links

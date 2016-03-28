@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   include EpiCas::DeviseHelper
 
   before_save :assign_role
+  has_many :categories
+  has_many :questions
+  has_many :quizzes
 
   def assign_role
   	roleString = self.dn.split(',')[2].downcase
@@ -18,6 +21,11 @@ class User < ActiveRecord::Base
 
     #hack so that my account will be staff
     if self.username == "aca12nw"
+      self.role = "staff"
+    end
+
+    #hack so that my account will be staff
+    if self.username == "aca12jh"
       self.role = "staff"
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328110003) do
+ActiveRecord::Schema.define(version: 20160328122246) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -27,7 +27,10 @@ ActiveRecord::Schema.define(version: 20160328110003) do
     t.string   "categoryBody"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
+
+  add_index "categories", ["user_id"], name: "index_categories_on_user_id"
 
   create_table "directions", force: :cascade do |t|
     t.string   "directionName"
@@ -61,9 +64,11 @@ ActiveRecord::Schema.define(version: 20160328110003) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
+    t.integer  "user_id"
   end
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id"
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
   create_table "quizzes", force: :cascade do |t|
     t.string   "title"
@@ -71,7 +76,10 @@ ActiveRecord::Schema.define(version: 20160328110003) do
     t.text     "instructions"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
+
+  add_index "quizzes", ["user_id"], name: "index_quizzes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",              default: "", null: false
