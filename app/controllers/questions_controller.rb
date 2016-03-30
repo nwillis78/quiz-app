@@ -47,6 +47,7 @@ class QuestionsController < ApplicationController
     def create
         @question = Question.new(question_params)
         @category = Category.find(@question.category_id)
+        @language = Language.find(@question.language_id)
         @question.user = current_user
         
         if @question.save
@@ -81,8 +82,13 @@ class QuestionsController < ApplicationController
         @question = Question.find(params[:id])
         @question.destroy
         @questions = Question.all
+
+        if @question.destroyed?
+            redirect_to category_questions_path(@questions)
+        else
+            redirect_to category_questions_path(@questions), :flash => { :danger => "Error: #{@question.errors[:base][0].to_s}" }
+        end
         
-        redirect_to category_questions_path(@questions)
     end 
 
     def update_questions
@@ -106,5 +112,5 @@ class QuestionsController < ApplicationController
         def question_params_no_answers
             params.require(:question).permit(:category_id, :body)
         end
-    
+
 end

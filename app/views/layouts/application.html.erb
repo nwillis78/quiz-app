@@ -62,6 +62,8 @@
         </header>
         <% end %>
 
+        <%= render partial: "layouts/flash_messages", flash: flash %> 
+
     <% end %>
     <%= yield %>
 
