@@ -58,7 +58,11 @@ class LanguagesController < ApplicationController
   		@language = Language.find(params[:id])
   		@language.destroy
  
-  		redirect_to languages_path
+  		if @language.destroyed?
+            redirect_to languages_path
+        else
+            redirect_to languages_path, :flash => { :danger => "Error: #{@language.errors[:base][0].to_s}" }
+        end
 	end
 
 	private
