@@ -20,21 +20,43 @@ class QuizzesController < ApplicationController
     
     def new
         @quiz = Quiz.new
-        @questions = Question.where("category_id = ?", Category.first.id)
-        @answers = Answer.where("question_id = ?", @questions.first.id)
+        @categories = Category.where("user_id = ?", current_user.id)
+        if @categories.first == nil
+            redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a question before you can create a quiz" }
+            return
+        end
+
+
+        @questions = Question.where("category_id = ?", @categories.first.id)
+        if @questions.first == nil
+            redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a question before you can create a quiz" }
+            return
+        end
+
         @link = Link.new
         @no_questions = 0
+
+        if @questions.first != nil
+            @answers = Answer.where("question_id = ?", @questions.first.id)
+        else
+            @answers = nil
+        end
 
         if @quiz.language_id
             @language = Language.find(@quiz.language_id)
         else
-            @language = Language.first
+            @language = Language.where("user_id = ?", current_user.id).first
+        end
+
+        #If a language or category doesn't exist then this must be created before going to this page
+        if @language == nil
+            redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a language before you can create a quiz" }
         end
     end
     
     def edit
         @quiz = Quiz.find(params[:id])
-        @questions = Question.where("category_id = ?", Category.first.id)
+        @questions = Question.where("category_id = ?", Category.where("user_id = ?", current_user.id).first.id)
         @answers = Answer.where("question_id = ?", @questions.first.id)
         if @quiz.questions.first != nil
             @links = @quiz.questions

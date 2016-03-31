@@ -24,17 +24,27 @@ class QuestionsController < ApplicationController
     
     def new
         @question = Question.new
+        @question.build_category
         if @question.category_id
             @category = Category.find(@question.category_id)
         else
-            @category = Category.first
+            @category = Category.where("user_id = ?", current_user.id).first
         end
+
         if @question.language_id
             @language = Language.find(@question.language_id)
         else
-            @language = Language.first
+            @language = Language.where("user_id = ?", current_user.id).first
         end
         
+        #If a language or category doesn't exist then this must be created before going to this page
+        if @category == nil && @language == nil
+            redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a category and a language before you can create a question" }
+        elsif @category == nil
+            redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a category before you can create a question" }
+        elsif @language == nil
+            redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a language before you can create a question" }
+        end
         
     end
     
@@ -46,7 +56,7 @@ class QuestionsController < ApplicationController
     
     def create
         @question = Question.new(question_params)
-        @category = Category.find(@question.category_id)
+        @category = Category.find(@question.category_id)  
         @language = Language.find(@question.language_id)
         @question.user = current_user
         
@@ -106,7 +116,8 @@ class QuestionsController < ApplicationController
     
     private
         def question_params
-            params.require(:question).permit(:category_id, :language_id, :body, :user, answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
+            params.require(:question).permit(:category_id, :language_id, :body, :user, 
+                answers_attributes: [:id, :answerString, :isCorrect, :_destroy])
         end
 
         def question_params_no_answers

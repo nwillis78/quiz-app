@@ -17,7 +17,11 @@
 		<% @catid = 0 %>
 		<% @quesid = 0 %>
 		<% @questions = Question.where("category_id = ?", Category.first.id) %>
-		<% @answers = Answer.where("question_id = ?", @questions.first.id) %>
+		<% if @questions.first != nil %>
+			<% @answers = Answer.where("question_id = ?", @questions.first.id) %>
+		<% else %>
+			<% @answers = nil %>
+		<% end %>
 	<% end %>
 
 		<td class="col-sm-1">	
@@ -55,12 +59,13 @@
 		<% else %>
 			<div id="displayed_answers">
 		<% end %>
-		
-			<% @answers.each do |answer| %>
-			<p>
-				<strong>Answer:</strong> <%= answer.answerString %>
-				<strong>isCorrect:</strong> <%= answer.isCorrect %>
-			</p>
+			<% if @answers != nil %>
+				<% @answers.each do |answer| %>
+				<p>
+					<strong>Answer:</strong> <%= answer.answerString %>
+					<strong>isCorrect:</strong> <%= answer.isCorrect %>
+				</p>
+				<% end %>
 			<% end %>
 			</div>
 			
