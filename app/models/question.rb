@@ -26,15 +26,15 @@ class Question < ActiveRecord::Base
 	end
 
     def check_if_in_quiz
-            @quizzes = Quiz.all
-            @quizzes.each do |quiz|
-                quiz.questions.each do |question|
-                    if question.id == self.attributes['id']
-                        errors.add(:base, "Cannot delete question while it is in use in a quiz")
-                        return false
-                    end
+        @quizzes = Quiz.all
+        @quizzes.each do |quiz|
+            quiz.questions.each do |question|
+                if question.id == self.attributes['id']
+                    errors.add(:base, "Cannot delete question while it is in use in a quiz")
+                    return false
                 end
             end
         end
+    end
 
 end

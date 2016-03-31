@@ -43,7 +43,11 @@ class CategoriesController < ApplicationController
         @category = Category.find(params[:id])
         @category.destroy
         
-        redirect_to categories_path
+        if @category.destroyed?
+            redirect_to categories_path
+        else
+            redirect_to categories_path, :flash => { :danger => "Error: #{@category.errors[:base][0].to_s}" }
+        end
     end
 
         
