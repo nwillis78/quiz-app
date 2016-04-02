@@ -26,18 +26,30 @@ class Ability
     		question.try(:user) == user
   		end
 
-  		can :read, Quiz do |quiz|
-    		quiz.try(:user) == user
+  		can :read, Language do |language|
+    		language.try(:user) == user
   		end
-  		can :create, Quiz
-  		can :update, Quiz do |quiz|
-    		quiz.try(:user) == user
+  		can :create, Language
+  		can :update, Language do |language|
+    		language.try(:user) == user
   		end
-  		can :destroy, Quiz do |quiz|
-    		quiz.try(:user) == user
+  		can :destroy, Language do |language|
+    		language.try(:user) == user
   		end
 
-  		can :manage, Language 
+      can :read, Quiz do |quiz|
+        quiz.try(:user) == user
+      end
+      can :create, Quiz
+      can :update, Quiz do |quiz|
+        quiz.try(:user) == user
+      end
+      can :destroy, Quiz do |quiz|
+        quiz.try(:user) == user
+      end
+
+  		
+      can :manage, Answer
 
     else
       #define what students can do

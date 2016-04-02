@@ -69,6 +69,7 @@ class QuizzesController < ApplicationController
     
     def create
         @quiz = Quiz.new(quiz_params)
+        @language = @quiz.language
         @quiz.user = current_user
         
         if @quiz.save
@@ -96,7 +97,7 @@ class QuizzesController < ApplicationController
     private
         def quiz_params
             params.require(:quiz).permit(:title, :description, 
-                :instructions, :language_id, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
+                :instructions, :attemptsAllowed, :language_id, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
                 questions_attributes: [:category_id, :body])
         end
     
