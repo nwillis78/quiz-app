@@ -19,6 +19,14 @@
     <p>
       <strong>Attempts Allowed:</strong> <%= @quiz.attemptsAllowed %>
     </p>
+    <p>
+      <strong>Shuffle Questions:</strong> 
+      <% if @quiz.shuffleQuestions == 1 %>
+        True
+      <% else %>
+        False
+      <% end %>
+    </p>
 		<p>
 			<strong>Number of questions:</strong> <%= @quiz.links.length %>
 		</p>
