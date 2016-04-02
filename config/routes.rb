@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   
   resources :links
   
+  resources :user_quizzes
+  
   resources :languages do
       resources :directions
   end

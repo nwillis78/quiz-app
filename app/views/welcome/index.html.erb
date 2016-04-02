@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang='en'>
   <h1>Online Quiz App</h1>
-	<h2>This is the welcome page</h2>
+	<p>You have <%= @noQuizzes %> quizzes ready to be set</p>
+	<div id="button_text">
+		<button type = "button" class="btn btn-primary">
+		<%= link_to 'Set Quiz', new_user_quiz_path %></button>
+	</div>
 
 </html>

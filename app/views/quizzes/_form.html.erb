@@ -17,7 +17,7 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :language_id, class: 'control-label'%>	
-		<%= f.select :language_id, options_from_collection_for_select(Language.all, :id, :languageName , {:selected => @language.id})%>
+		<%= f.select :language_id, options_from_collection_for_select(Language.where("user_id = ?", current_user.id), :id, :languageName , {:selected => @language.id})%>
 
 	</p>
 	</div>

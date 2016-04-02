@@ -1,0 +1,17 @@
+<%= link_to root_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+<br><br>
+<div class="panel panel-default">
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Set Quiz Info</h1>
+  	</div>
+  	<div class="panel-body">
+		Quiz <%= @user_quiz.quiz_id %>
+		Student <%= @user_quiz.student_id %>
+		Staff <%= @user_quiz.staff_id %>
+  	</div>
+</div>
+
+<button type = "button" class="btn btn-default">
+<%= link_to 'Edit', edit_user_quiz_path %></button>
