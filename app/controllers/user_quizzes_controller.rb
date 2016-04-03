@@ -1,4 +1,5 @@
 class UserQuizzesController < ApplicationController
+    
 	def new
 		@user_quiz = UserQuiz.new
 		if @user_quiz.quiz_id
