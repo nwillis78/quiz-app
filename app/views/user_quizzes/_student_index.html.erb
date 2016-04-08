@@ -1,17 +1,14 @@
-
-		
-
-
-<% @userQuizzes.each do |userQuiz| %>
+<% @studentQuizzes.each do |studentQuiz| %>
+<%= link_to quiz_pages_path(:userQuiz => studentQuiz.id) do %>
 <div style="padding:10px; background-color: #aad5aa; border-radius: 10px; margin-top:10px;">
 <div style="align-self: left; display:inline-block; width:90%; height:auto; ">
-			<% @quiz = Quiz.find(userQuiz.quiz_id) %>
+			<% @quiz = Quiz.find(studentQuiz.quiz_id) %>
 			<strong><%= @quiz.title %></strong><br>
-			Released on: <%= userQuiz.created_at.strftime("%d %b %Y") %><br>
-			Closing date: X<br>
-			% of students who have taken quiz: X
+			Released on: <%= studentQuiz.created_at.strftime("%d %b %Y") %><br>
+			Closing date: X
 		</div>
 		<div style="align-self: right; display:inline-block; height: 100%; vertical-align: center;">
 			<strong>Live Now</strong>
 		</div></div>
 		<% end %>
+<%end%>

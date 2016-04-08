@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :languages do
       resources :directions
   end
+  
+  resources :quiz_pages
     
   get 'welcome/index'
   get 'quizzes/get_selected_question'

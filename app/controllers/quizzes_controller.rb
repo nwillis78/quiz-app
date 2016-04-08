@@ -1,6 +1,5 @@
 class QuizzesController < ApplicationController
     before_filter :authenticate_user!
-    helper_method :get_selected_question
     load_and_authorize_resource
 
 
@@ -35,13 +34,8 @@ class QuizzesController < ApplicationController
 
         @link = Link.new
         @no_questions = 0
-
-        if @questions.first != nil
-            @answers = Answer.where("question_id = ?", @questions.first.id)
-        else
-            @answers = nil
-        end
-
+        @answers = Answer.where("question_id = ?", @questions.first.id)
+        
         if @quiz.language_id
             @language = Language.find(@quiz.language_id)
         else

@@ -25,6 +25,7 @@ class QuestionsController < ApplicationController
     def new
         @question = Question.new
         @question.build_category
+
         if @question.category_id
             @category = Category.find(@question.category_id)
         else

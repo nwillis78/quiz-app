@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  # limits the number of answers
+  # limits the number of answers to 6 by hiding the add answer button when the limit is reached
 
   check_to_hide_or_show_add_link = ->
     if $('tbody#answer_table tr').length == 6
