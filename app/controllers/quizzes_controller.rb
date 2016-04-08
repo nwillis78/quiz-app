@@ -5,6 +5,7 @@ class QuizzesController < ApplicationController
 
     def index
         @quizzes = Quiz.where("user_id = ?", current_user.id)
+        @noQuizzes = Quiz.where("user_id = ?", current_user.id).count
     end
     
     def show
@@ -85,6 +86,9 @@ class QuizzesController < ApplicationController
         @quiz.destroy
         
         redirect_to quizzes_path
+    end
+
+    def take
     end
 
     

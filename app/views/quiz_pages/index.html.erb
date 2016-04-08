@@ -1,0 +1,22 @@
+<%= link_to root_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+
+<h3><%=@quiz.title%></h3>
+<p>Please read the information below very carefully, when you click 'Start Quiz' your time will be started and this will count towards the number of attempts allowed.</p>
+<p><strong>Description</strong><br><%=@quiz.description%></p>
+<p><strong>Instructions </strong><br><%=@quiz.instructions%></p>
+<p><strong>Attempts Remaining </strong><%=@attemptRemaining%></p>
+<p><strong>Number of questions </strong><%=@quiz.questions.count%></p>
+
+
+<br><br>
+
+<% if @attemptRemaining == 0%>
+	You have 0 attempts remaining. You may not take this quiz again.
+<% else %>
+	<div id="button_text">
+		<button type = "button" class="btn btn-primary">
+		<%= link_to 'Start Quiz', new_quiz_page_path(:userQuiz => params[:userQuiz]) %></button>
+	</div>
+<% end %>

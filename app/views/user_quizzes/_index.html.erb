@@ -3,6 +3,7 @@
 
 
 <% @userQuizzes.each do |userQuiz| %>
+<%= link_to user_quiz_path(userQuiz.id) do %>
 <div style="padding:10px; background-color: #aad5aa; border-radius: 10px; margin-top:10px;">
 <div style="align-self: left; display:inline-block; width:90%; height:auto; ">
 			<% @quiz = Quiz.find(userQuiz.quiz_id) %>
@@ -15,3 +16,4 @@
 			<strong>Live Now</strong>
 		</div></div>
 		<% end %>
+<% end %>

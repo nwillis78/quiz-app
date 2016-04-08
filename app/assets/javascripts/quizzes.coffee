@@ -7,7 +7,6 @@ $ ->
   #update_questions method so that the questions select can be updated. If this is successfull then also update
   #the displayed answers by sending the new value in the questions select to the update answers
   $(document).on 'change', '[id^=categories_select]', (evt) ->
-    console.log(evt.target.id.slice(17))
     $.ajax '../../questions/update_questions',
       type: 'GET'
       dataType: 'script'

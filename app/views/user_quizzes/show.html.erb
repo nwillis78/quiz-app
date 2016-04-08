@@ -7,9 +7,27 @@
    		<h1 class="panel-title">Set Quiz Info</h1>
   	</div>
   	<div class="panel-body">
-		Quiz <%= @user_quiz.quiz_id %>
-		Student <%= @user_quiz.student_id %>
-		Staff <%= @user_quiz.staff_id %>
+		Quiz <%= @user_quiz.quiz_id %><br>
+		Student <%= @user_quiz.student_id %><br>
+		Staff <%= @user_quiz.staff_id %><br>
+
+		<% if @user_quiz.result != nil %>
+		<strong>Results</strong>
+		<table style="width:100%">
+		  <tr>
+		    <td>Student</td>
+		    <td>Result</td> 
+		    <td>Attempts Taken</td>
+		  </tr>
+		  <tr>
+		    <td><%= User.find(@user_quiz.student_id).username %></td>
+		    <td><%= @user_quiz.result %>%</td> 
+		    <td><%= @user_quiz.attemptsTaken %></td>
+		  </tr>
+		</table>
+		<% else %>
+			This quiz has not been taken yet
+		<% end %>
   	</div>
 </div>
 

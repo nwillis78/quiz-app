@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   
   resources :quiz_pages
+  get 'quizzes/take'
     
   get 'welcome/index'
   get 'quizzes/get_selected_question'
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   get 'answers/update_answers', as: 'update_answers'
   #get 'questions/update_questions?category_id' => 'questions#update_questions', as: 'update_questions', :format => :json
   get 'questions/show_questions'
+  post 'quiz_pages/grading'
   
   #get '/update_questions' => 'quizzes#update_questions', as: :update_questions
   

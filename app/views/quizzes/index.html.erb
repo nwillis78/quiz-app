@@ -1,4 +1,19 @@
-<h1>Listing Quizzes</h1>
+<h1>Quizzes</h1>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>You have <%= @noQuizzes %> quizzes ready to be set. Use the button below to set a quiz for students to take.</p>
+	<div id="button_text">
+		<button type = "button" class="btn btn-primary">
+		<%= link_to 'Set Quiz', new_user_quiz_path %></button>
+	</div>
+  </div>
+</div>
+
+<h2>New and Existing Quizzes</h2>
+<p>Create new quizzes and manage existing quizzes below.</p>
 
 <div id="button_text">
 <button type = "button" class="btn btn-primary">
