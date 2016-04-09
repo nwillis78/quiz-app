@@ -13,9 +13,11 @@
     <p>
       <strong>Language:</strong> <%= @language %>
     </p>
+    <div dir="<%=@direction%>">
 		<p>
 			<%= @question.body %>
 		</p>
+    </div>
   	</div>
   	<div class="panel-heading">
    		<h1 class="panel-title">Answers</h1>
@@ -23,11 +25,26 @@
   	<ul class="list-group">
   	
     <% @question.answers.each do |answer| %>
-    	<% if answer.isCorrect %>
-			<li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
-		<% else %>
-			<li class="list-group-item list-group-item-danger"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
-		<% end %>
+    
+    <!--Depending on the language direction display the answer and 'correct'/'incorrect' on the correct sides-->
+    <%if @direction == "LTR" %>
+      <% if answer.isCorrect %>
+        <li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
+      <% else %>
+        <li class="list-group-item list-group-item-danger"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
+      <% end %>
+    <% else %>
+      <div dir="RTL">
+      <% if answer.isCorrect %>
+        <li class="list-group-item list-group-item-success"><div style="float:left;">Correct</div><%= answer.answerString %></li>
+      <% else %>
+        <li class="list-group-item list-group-item-danger"><div style="float:left;">Incorrect</div><%= answer.answerString %></li>
+      <% end %>
+      </div>
+    <% end %>
+    	
+    
+
 	<% end %>
   </ul>
 </div>

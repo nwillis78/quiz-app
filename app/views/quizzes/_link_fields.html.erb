@@ -30,10 +30,10 @@
 			Link id, this way it will be unique. If not then leave it as normal and it will be changed by the ajax
 			when link_to_add_association is pressed -->
 			<% if f.object.id %>
-				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
+				<%= f.select :question_category, options_for_select(Category.where("user_id = ?", current_user.id).collect { |category|
 	    		[category.categoryBody, category.id] }, @catid), {}, { id: "categories_select_#{f.object.id}" } %>
 			<% else %>
-				<%= f.select :question_category, options_for_select(Category.all.collect { |category|
+				<%= f.select :question_category, options_for_select(Category.where("user_id = ?", current_user.id).collect { |category|
 	    		[category.categoryBody, category.id] }, @catid), {}, { id: "categories_select_1" } %>
 			<% end %>
 				

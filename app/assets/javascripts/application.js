@@ -17,6 +17,7 @@
 //= require cocoon
 //= require quizzes
 //= require quizzes.js
+//= require questions
 //= require_tree .
 //= require_self
 

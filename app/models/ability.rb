@@ -25,6 +25,12 @@ class Ability
   		can :destroy, Question do |question|
     		question.try(:user) == user
   		end
+      can :update_questions, Question do |question|
+        question.try(:user) == user
+      end
+      can :update_questions_direction, Question do |question|
+        question.try(:user) == user
+      end
 
   		can :read, Language do |language|
     		language.try(:user) == user
@@ -47,7 +53,7 @@ class Ability
       can :destroy, Quiz do |quiz|
         quiz.try(:user) == user
       end
-
+      
   		
       can :manage, Answer
 

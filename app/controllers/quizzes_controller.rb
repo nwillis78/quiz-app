@@ -27,7 +27,7 @@ class QuizzesController < ApplicationController
         end
 
 
-        @questions = Question.where("category_id = ?", @categories.first.id)
+        @questions = Question.where("user_id = ?", current_user.id).where("category_id = ?", @categories.first.id)
         if @questions.first == nil
             redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a question before you can create a quiz" }
             return

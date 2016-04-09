@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       resources :users
   end
   
-  
-  
   resources :quizzes
+  get 'questions/update_questions_direction', as: 'update_questions_direction'
+
   
   resources :categories do
       resources :questions do
@@ -36,9 +36,12 @@ Rails.application.routes.draw do
   
   get 'questions/update_questions', as: 'update_questions'
   get 'answers/update_answers', as: 'update_answers'
+  
   #get 'questions/update_questions?category_id' => 'questions#update_questions', as: 'update_questions', :format => :json
   get 'questions/show_questions'
   post 'quiz_pages/grading'
+  
+  
   
   #get '/update_questions' => 'quizzes#update_questions', as: :update_questions
   

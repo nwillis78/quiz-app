@@ -16,6 +16,7 @@
 	</tr>
 
 	<% @questions.each do |question| %>
+		<% @direction = Direction.find(question.language.direction_id).directionCode %>
 		<tr>
 			<td>
 				<% if question.category != nil %>
@@ -27,7 +28,7 @@
 			<td>
 		    	<%= question.language.languageName %>
 			</td>
-			<td><%= question.body %></td>
+			<td><div dir="<%=@direction%>"><%= question.body %></div></td>
 			
 			<td><button type="button" class="btn btn-default"><%= link_to 'Show', category_question_path(question.category_id, question.id) %></button></td>
 

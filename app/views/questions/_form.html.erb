@@ -27,7 +27,7 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :language_id, class: 'control-label'%>	
-		<%= f.select :language_id, options_from_collection_for_select(Language.where("user_id = ?", current_user.id), :id, :languageName , {:selected => @language.id})%>
+		<%= f.select :language_id, options_from_collection_for_select(Language.where("user_id = ?", current_user.id), :id, :languageName , {:selected => @language.id}), { id: "questions_language_id" }%>
 
 	</p>
 	</div>
@@ -35,9 +35,12 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :body, class: 'control-label' %><br>
+		<div id="question_body_direction" dir="<%=@direction%>">
 		<%= f.text_area :body, class: 'form-control' %>
+		</div>
 	</p>
 	</div>
+	
 
 	<h2>Answers</h2>
 	<div id="answers">

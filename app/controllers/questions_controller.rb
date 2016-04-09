@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
         else 
             @language = 'Undefined'
         end
+        @direction = Direction.find(@question.language.direction_id).directionCode
     end
     
     def new
@@ -46,6 +47,8 @@ class QuestionsController < ApplicationController
         elsif @language == nil
             redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a language before you can create a question" }
         end
+
+        @direction = Direction.find(@language.direction_id).directionCode    
         
     end
     
@@ -53,6 +56,7 @@ class QuestionsController < ApplicationController
         @question = Question.find(params[:id])
         @category = Category.find(@question.category_id)
         @language = Language.find(@question.language_id)
+        @direction = Direction.find(@language.direction_id).directionCode  
     end
     
     def create
@@ -110,6 +114,14 @@ class QuestionsController < ApplicationController
           format.js 
         end
     end  
+
+    def update_questions_direction
+        @language = Language.find(params[:language_id])
+        @direction = Direction.find(@language.direction_id).directionCode 
+        respond_to do |format|
+          format.js 
+        end
+    end
 
     def show_questions
         @question = Question.find_by("id = ?", params[:links][:category_id])

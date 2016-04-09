@@ -2,6 +2,8 @@
   Back
 <% end %>
 
+<div dir="<%=@direction%>">
+
 <h3><%=@quiz.title%></h3>
 <p>Please read the information below very carefully, when you click 'Start Quiz' your time will be started and this will count towards the number of attempts allowed.</p>
 <p><strong>Description</strong><br><%=@quiz.description%></p>
@@ -20,3 +22,4 @@
 		<%= link_to 'Start Quiz', new_quiz_page_path(:userQuiz => params[:userQuiz]) %></button>
 	</div>
 <% end %>
+</div>

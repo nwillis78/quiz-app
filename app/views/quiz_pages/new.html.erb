@@ -1,4 +1,5 @@
 <%= form_tag({:controller => "quiz_pages", :action => "grading"}) do%>
+<div dir="<%=@direction%>">
 	<% if @quiz.shuffleQuestions %>
 		<% @quiz.questions.shuffle.each do |question| %>
 			<%= question.body %><br>
@@ -32,6 +33,7 @@
 		<% end %>
 		</p>
 		</div>
+</div>
 
 <% end %>
 

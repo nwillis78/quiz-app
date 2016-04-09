@@ -3,11 +3,14 @@ class QuizPagesController < ApplicationController
 		@quiz = Quiz.find(UserQuiz.find(params[:userQuiz]).quiz_id)
 		@userQuiz = UserQuiz.find(params[:userQuiz])
 		@attemptRemaining = @quiz.attemptsAllowed - @userQuiz.attemptsTaken
+
+		@direction = Direction.find(Language.find(@quiz.language_id).direction_id).directionCode	
 	end
 
 	def new
 		@quiz = Quiz.find(UserQuiz.find(params[:userQuiz]).quiz_id)
 		@userQuiz = UserQuiz.find(params[:userQuiz])
+		@direction = Direction.find(Language.find(@quiz.language_id).direction_id).directionCode
 	end
 
 	def grading
