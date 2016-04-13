@@ -32,11 +32,12 @@
 	</tr>
 
 	<% @quizzes.each do |quiz| %>
+	<% @direction = Direction.find(quiz.language.direction_id).directionCode %>
 		<tr>
 			<td><%= quiz.language.languageName %></td>
-			<td><%= quiz.title %></td>
-			<td><%= quiz.description %></td>
-			<td><%= quiz.instructions %></td>
+			<td><div dir="<%=@direction%>"><%= quiz.title %></div></td>
+			<td><div dir="<%=@direction%>"><%= quiz.description %></div></td>
+			<td><div dir="<%=@direction%>"><%= quiz.instructions %></div></td>
 			<td><%= quiz.links.length %></td>
 			<td><button type="button" class="btn btn-default"><%= link_to 'Show', quiz_path(quiz) %></button></td>
 

@@ -25,7 +25,9 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :title, class: 'control-label'%>	
+		<div id="quiz_title_direction" dir="<%=@direction%>">
         <%= f.text_field :title, class: 'form-control' %>
+        </div>
 	</p>
 	</div>
 
@@ -34,14 +36,18 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :description, class: 'control-label' %><br>
+		<div id="quiz_description_direction" dir="<%=@direction%>">
 		<%= f.text_area :description, class: 'form-control' %>
+		</div>
 	</p>
 	</div>
 
 	<div class="field form-group">
 	<p>
 		<%= f.label :instructions, class: 'control-label' %><br>
+		<div id="quiz_instructions_direction" dir="<%=@direction%>">
 		<%= f.text_area :instructions, class: 'form-control' %>
+		</div>
 	</p>
 	</div>
 

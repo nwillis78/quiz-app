@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   scope "/admin" do
       resources :users
   end
-  
+  get 'quizzes/update_quizzes_direction', as: 'update_quizzes_direction'
   resources :quizzes
   get 'questions/update_questions_direction', as: 'update_questions_direction'
+  
 
   
   resources :categories do

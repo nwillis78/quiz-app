@@ -4,17 +4,17 @@
 <br><br>
 <div class="panel panel-default">
   	<div class="panel-heading">
-   		<h1 class="panel-title"><%=@quiz.title%></h1>
+   		<h1 class="panel-title"><div dir="<%=@direction%>"><%=@quiz.title%></div></h1>
   	</div>
   	<div class="panel-body">
     <p>
       <strong>Language:</strong> <%= @language %>
     </p>
     	<p>
-			<strong>Description:</strong> <%= @quiz.description %>
+			<strong>Description:</strong> <div dir="<%=@direction%>"><%= @quiz.description %></div>
 		</p>
 		<p>
-			<strong>Instructions:</strong> <%= @quiz.instructions %>
+			<strong>Instructions:</strong> <div dir="<%=@direction%>"><%= @quiz.instructions %></div>
 		</p>
     <p>
       <strong>Attempts Allowed:</strong> <%= @quiz.attemptsAllowed %>
@@ -42,17 +42,27 @@
 				<strong>Category:</strong> <%= question.category.categoryBody %>
 			</p>
 			<p>
-				<%= question.body %>
+				<div dir="<%=@direction%>"><%= question.body %></div>
 			</p>
 				<strong>Answers:</strong>
   		</div>
   		
   		<% question.answers.each do |answer| %>
-  			<% if answer.isCorrect %>
-				<li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
-			<% else %>
-				<li class="list-group-item list-group-item-danger"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
-			<% end %>
+  			<%if @direction == "LTR" %>
+      <% if answer.isCorrect %>
+        <li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
+      <% else %>
+        <li class="list-group-item list-group-item-danger"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
+      <% end %>
+    <% else %>
+      <div dir="RTL">
+      <% if answer.isCorrect %>
+        <li class="list-group-item list-group-item-success"><div style="float:left;">Correct</div><%= answer.answerString %></li>
+      <% else %>
+        <li class="list-group-item list-group-item-danger"><div style="float:left;">Incorrect</div><%= answer.answerString %></li>
+      <% end %>
+      </div>
+    <% end %>
   		<% end %>
   	<% end %>
   	

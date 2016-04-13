@@ -24,8 +24,17 @@ $ ->
       $('.links').show()
     return
 
+
   $('#answers').bind 'cocoon:after-insert', ->
     check_to_hide_or_show_add_link()
+    $.ajax '/questions/update_questions_direction',
+      type: 'GET'
+      dataType: 'script'
+      data: {"language_id": $("#question_language_id option:selected").val()}
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+      success: (data, textStatus, jqXHR) ->
+        console.log("Direction was changed")
     return
   $('#answers').bind 'cocoon:after-remove', ->
     check_to_hide_or_show_add_link()

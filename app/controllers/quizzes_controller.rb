@@ -16,6 +16,7 @@ class QuizzesController < ApplicationController
         else 
             @language = 'Undefined'
         end
+        @direction = Direction.find(@quiz.language.direction_id).directionCode
     end
     
     def new
@@ -47,6 +48,7 @@ class QuizzesController < ApplicationController
         if @language == nil
             redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a language before you can create a quiz" }
         end
+        @direction = Direction.find(@language.direction_id).directionCode 
     end
     
     def edit
@@ -60,6 +62,7 @@ class QuizzesController < ApplicationController
         end
         @no_questions = 0
         @language = Language.find(@quiz.language_id)
+        @direction = Direction.find(@language.direction_id).directionCode 
     end
     
     def create
@@ -89,6 +92,14 @@ class QuizzesController < ApplicationController
     end
 
     def take
+    end
+
+    def update_quizzes_direction
+        @language = Language.find(params[:language_id])
+        @direction = Direction.find(@language.direction_id).directionCode 
+        respond_to do |format|
+          format.js 
+        end
     end
 
     

@@ -47,6 +47,17 @@ $(document).ready ->
       $(this).children('.table_row').children('.col-sm-6').children('#displayed_answers').attr 'id', 'displayed_answers_' + randno
       return
 
+#listens for change of language drop down and changes direction of fields accordingly
+  $(document).on 'change', '#quiz_language_id', (evt) ->
+    $.ajax '/quizzes/update_quizzes_direction',
+      type: 'GET'
+      dataType: 'script'
+      data: {"language_id": $("#quiz_language_id option:selected").val()}
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+      success: (data, textStatus, jqXHR) ->
+        console.log("Direction was changed")
+
 
 
 

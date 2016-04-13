@@ -12,6 +12,7 @@
 		<% @quesid = @link.question_id %>
 		<% @questions = Question.where('category_id = ?', @catid) %>
 		<% @answers = Answer.where('question_id = ?', @quesid) %>
+		<% @direction = Direction.find(Language.find(Question.find(@quesid).language_id).direction_id).directionCode %>
 	<% else %>
 		<% @link = Link.new %>
 		<% @catid = 0 %>
@@ -22,6 +23,7 @@
 		<% else %>
 			<% @answers = nil %>
 		<% end %>
+		<%= @direction = Direction.find(Language.find(Question.find(@questions.first.id).language_id).direction_id).directionCode %>
 	<% end %>
 
 		<td class="col-sm-1">	
@@ -61,10 +63,14 @@
 		<% end %>
 			<% if @answers != nil %>
 				<% @answers.each do |answer| %>
-				<p>
-					<strong>Answer:</strong> <%= answer.answerString %>
-					<strong>isCorrect:</strong> <%= answer.isCorrect %>
-				</p>
+						
+				        <p>
+							<div class="answer_field" style="width:70%; float:left;">
+							<div style="float:left;"><strong>Answer:</strong></div><div id="answers_direction_1" dir="<%=@direction%>"><%= answer.answerString %></div></div>
+							<div class="answer_field" style="width:30%; float:right; text-align: center;">
+							<strong>isCorrect:</strong> <%= answer.isCorrect %></div>
+						</p>
+						
 				<% end %>
 			<% end %>
 			</div>

@@ -31,6 +31,9 @@ class Ability
       can :update_questions_direction, Question do |question|
         question.try(:user) == user
       end
+      can :update_quizzes_direction, Quiz do |quiz|
+        quiz.try(:user) == user
+      end
 
   		can :read, Language do |language|
     		language.try(:user) == user
