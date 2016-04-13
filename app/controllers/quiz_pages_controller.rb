@@ -11,6 +11,9 @@ class QuizPagesController < ApplicationController
 		@quiz = Quiz.find(UserQuiz.find(params[:userQuiz]).quiz_id)
 		@userQuiz = UserQuiz.find(params[:userQuiz])
 		@direction = Direction.find(Language.find(@quiz.language_id).direction_id).directionCode
+
+		@userQuiz.attemptsTaken += 1
+  		@userQuiz.save
 	end
 
 	def grading
@@ -39,7 +42,6 @@ class QuizPagesController < ApplicationController
   		 @score = @correct * 100 / @total
 
   		 @userQuiz.result = @score
-		 @userQuiz.attemptsTaken += 1
   		 @userQuiz.save
 
 		redirect_to root_path

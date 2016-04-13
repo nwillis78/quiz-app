@@ -1,3 +1,5 @@
+<script>Turbolinks.pagesCached(0);
+console.log('restored page')</script>
 <%= link_to root_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
   Back
 <% end %>
@@ -14,7 +16,7 @@
 
 <br><br>
 
-<% if @attemptRemaining == 0%>
+<% if @attemptRemaining <= 0%>
 	You have 0 attempts remaining. You may not take this quiz again.
 <% else %>
 	<div id="button_text">
