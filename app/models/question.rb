@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
     require_dependency 'lib/association_count_validator.rb'
-    before_destroy :check_if_in_quiz
+    before_destroy -> { check_if_in_quiz('destroy') }
+    before_update -> {check_if_in_quiz('update')}
 
     belongs_to :category
     belongs_to :user
@@ -25,12 +26,12 @@ class Question < ActiveRecord::Base
 	    end
 	end
 
-    def check_if_in_quiz
+    def check_if_in_quiz(method)
         @quizzes = Quiz.all
         @quizzes.each do |quiz|
             quiz.questions.each do |question|
                 if question.id == self.attributes['id']
-                    errors.add(:base, "Cannot delete question while it is in use in a quiz")
+                    errors.add(:base, "Cannot "+method+" question while it is in use in a quiz")
                     return false
                 end
             end

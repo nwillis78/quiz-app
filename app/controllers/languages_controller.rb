@@ -50,7 +50,7 @@ class LanguagesController < ApplicationController
   		if @language.update(language_params)
     		redirect_to @language
   		else
-    		render 'edit'
+    		render 'edit', :flash => { :danger => "Error: #{@language.errors[:base][0].to_s}" } 
   		end
 	end
 

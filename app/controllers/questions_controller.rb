@@ -82,12 +82,14 @@ class QuestionsController < ApplicationController
         #category id
         @question_edit = Question.new(question_params_no_answers)
         @category = Category.find(@question_edit.category_id)
+        @language = Language.find(@question.language_id)
+
 
         if @question.update(question_params)
             redirect_to category_question_path(@question.category_id, @question)
         else
             respond_to do |format|
-                format.html { render :template => "questions/edit" }
+                format.html { render :template => "questions/edit", :flash => { :danger => "Error: #{@question.errors[:base][0].to_s}" } }
             end
             
         end

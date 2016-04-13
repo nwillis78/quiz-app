@@ -1,5 +1,6 @@
 class Language < ActiveRecord::Base
-	before_destroy :check_if_in_question_or_quiz
+    before_destroy -> { check_if_in_question_or_quiz('destroy') }
+    before_update -> {check_if_in_question_or_quiz('update')}
 	belongs_to :direction
 	belongs_to :user
 	has_many :question
@@ -9,7 +10,7 @@ class Language < ActiveRecord::Base
                     length: { minimum: 3 }
     validates :direction_id, presence: true
 
-    def check_if_in_question_or_quiz
+    def check_if_in_question_or_quiz(method)
     	inQuestion = false
     	inQuiz = false
 
@@ -30,13 +31,13 @@ class Language < ActiveRecord::Base
         end
 
         if inQuiz && inQuestion
-        	errors.add(:base, "Cannot delete language while it is in use in a question and a quiz")
+        	errors.add(:base, "Cannot "+method+" language while it is in use in a question and a quiz")
             return false
         elsif inQuiz
-        	errors.add(:base, "Cannot delete language while it is in use in a quiz")
+        	errors.add(:base, "Cannot "+method+" language while it is in use in a quiz")
             return false
         elsif inQuestion
-        	errors.add(:base, "Cannot delete language while it is in use in a question")
+        	errors.add(:base, "Cannot "+method+" language while it is in use in a question")
             return false
         end
     end

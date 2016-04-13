@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
         if @category.update(category_params)
             redirect_to @category
         else
-            render 'edit'
+            render 'edit', :flash => { :danger => "Error: #{@category.errors[:base][0].to_s}" } 
         end
     end
     
