@@ -23,7 +23,7 @@
 		<% else %>
 			<% @answers = nil %>
 		<% end %>
-		<%= @direction = Direction.find(Language.find(Question.find(@questions.first.id).language_id).direction_id).directionCode %>
+		<% @direction = Direction.find(Language.find(Question.find(@questions.first.id).language_id).direction_id).directionCode %>
 	<% end %>
 
 		<td class="col-sm-1">	

@@ -3,6 +3,7 @@ class QuizPagesController < ApplicationController
 		@quiz = Quiz.find(UserQuiz.find(params[:userQuiz]).quiz_id)
 		@userQuiz = UserQuiz.find(params[:userQuiz])
 		@attemptRemaining = @quiz.attemptsAllowed - @userQuiz.attemptsTaken
+		@time_allowed = @quiz.time_allowed
 
 		@direction = Direction.find(Language.find(@quiz.language_id).direction_id).directionCode	
 	end
@@ -12,8 +13,13 @@ class QuizPagesController < ApplicationController
 		@userQuiz = UserQuiz.find(params[:userQuiz])
 		@direction = Direction.find(Language.find(@quiz.language_id).direction_id).directionCode
 
+
 		@userQuiz.attemptsTaken += 1
+		@userQuiz.time_started = DateTime.now
   		@userQuiz.save
+
+  		@time_started = @userQuiz.time_started
+  		@time_allowed = @quiz.time_allowed
 	end
 
 	def grading
