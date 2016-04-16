@@ -42,10 +42,12 @@ class QuestionsController < ApplicationController
         #If a language or category doesn't exist then this must be created before going to this page
         if @category == nil && @language == nil
             redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a category and a language before you can create a question" }
+            return
         elsif @category == nil
             redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a category before you can create a question" }
-        elsif @language == nil
+            return
             redirect_to category_questions_path(Question.all), :flash => { :warning => "You must create a language before you can create a question" }
+            return
         end
 
         @direction = Direction.find(@language.direction_id).directionCode    

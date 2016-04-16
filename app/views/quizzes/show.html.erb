@@ -30,10 +30,12 @@
     <p>
       <strong>Time Allowed:</strong> <%= @quiz.time_allowed %> minutes
     </p>
+
 		<p>
 			<strong>Number of questions:</strong> <%= @quiz.links.length %>
 		</p>
   	</div>
+
   	<% @i=0 %>
   	<% @quiz.questions.each do |question| %>
   		<% @i = @i+1 %>

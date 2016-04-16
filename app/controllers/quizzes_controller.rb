@@ -63,6 +63,8 @@ class QuizzesController < ApplicationController
         @no_questions = 0
         @language = Language.find(@quiz.language_id)
         @direction = Direction.find(@language.direction_id).directionCode 
+
+
     end
     
     def create
@@ -79,9 +81,12 @@ class QuizzesController < ApplicationController
     
     def update
         @quiz = Quiz.find(params[:id])
-        
-        @quiz.update(quiz_params)
-        redirect_to @quiz
+        @language = Language.find(@quiz.language_id)
+        if @quiz.update(quiz_params)
+            redirect_to @quiz
+        else
+            render 'edit'
+        end
     end
     
     def destroy

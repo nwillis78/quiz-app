@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   #get 'questions/update_questions?category_id' => 'questions#update_questions', as: 'update_questions', :format => :json
   get 'questions/show_questions'
   post 'quiz_pages/grading'
+ 
   
   
   

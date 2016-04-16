@@ -1,5 +1,5 @@
 class AddShuffleQuestionsToQuizzes < ActiveRecord::Migration
   def change
-    add_column :quizzes, :shuffleQuestions, :bit
+    add_column :quizzes, :shuffleQuestions, :boolean
   end
 end

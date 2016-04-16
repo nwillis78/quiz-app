@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413135041) do
+ActiveRecord::Schema.define(version: 20160416140044) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -74,8 +74,21 @@ ActiveRecord::Schema.define(version: 20160413135041) do
   add_index "questions", ["language_id"], name: "index_questions_on_language_id"
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
-# Could not dump table "quizzes" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "quizzes", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "instructions"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "user_id"
+    t.integer  "language_id"
+    t.integer  "attemptsAllowed"
+    t.integer  "time_allowed"
+    t.boolean  "shuffleQuestions"
+  end
+
+  add_index "quizzes", ["language_id"], name: "index_quizzes_on_language_id"
+  add_index "quizzes", ["user_id"], name: "index_quizzes_on_user_id"
 
   create_table "user_quizzes", force: :cascade do |t|
     t.integer  "quiz_id"
@@ -86,6 +99,8 @@ ActiveRecord::Schema.define(version: 20160413135041) do
     t.integer  "result"
     t.integer  "attemptsTaken"
     t.datetime "time_started"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_index "user_quizzes", ["quiz_id"], name: "index_user_quizzes_on_quiz_id"

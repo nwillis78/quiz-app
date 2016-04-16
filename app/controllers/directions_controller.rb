@@ -5,6 +5,7 @@ class DirectionsController < ApplicationController
 	def index
     	@directions = Direction.all
   	end
+    
 	def new
 	end
 

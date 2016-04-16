@@ -17,6 +17,11 @@ class UserQuizzesController < ApplicationController
         @user_quiz = UserQuiz.new(user_quiz_params)
         @user_quiz.staff_id = current_user.id
         @user_quiz.attemptsTaken = 0
+        if @user_quiz.quiz_id
+            @quiz = Quiz.find(@user_quiz.quiz_id)
+        else
+            @quiz = Quiz.where("user_id = ?", current_user.id).first
+        end
         
         if @user_quiz.save
             redirect_to @user_quiz
@@ -50,6 +55,6 @@ class UserQuizzesController < ApplicationController
 
     private
         def user_quiz_params
-            params.require(:user_quiz).permit(:quiz_id, :student_id, :result, :attemptsTaken)
+            params.require(:user_quiz).permit(:quiz_id, :student_id, :start_date, :end_date, :result, :attemptsTaken)
         end
 end

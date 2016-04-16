@@ -56,6 +56,7 @@ class Ability
       can :destroy, Quiz do |quiz|
         quiz.try(:user) == user
       end
+
       
   		
       can :manage, Answer
