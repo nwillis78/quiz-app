@@ -1,4 +1,6 @@
 class QuizPagesController < ApplicationController
+	
+
 	def index
 		@quiz = Quiz.find(UserQuiz.find(params[:userQuiz]).quiz_id)
 		@userQuiz = UserQuiz.find(params[:userQuiz])
@@ -52,4 +54,6 @@ class QuizPagesController < ApplicationController
 
 		redirect_to root_path
 	end
+
+
 end
