@@ -21,6 +21,14 @@
 //= require_tree .
 //= require_self
 
+$(function() {
+  return $(document).on('click', 'tr[data-link]', function(evt) {
+    return window.location = this.dataset.link;
+  });
+});
+
+
+
 
 
 

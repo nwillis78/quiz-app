@@ -1,14 +1,35 @@
-<% @studentQuizzes.each do |studentQuiz| %>
-<%= link_to quiz_pages_path(:userQuiz => studentQuiz.id) do %>
-<div style="padding:10px; background-color: #aad5aa; border-radius: 10px; margin-top:10px;">
-<div style="align-self: left; display:inline-block; width:90%; height:auto; ">
-			<% @quiz = Quiz.find(studentQuiz.quiz_id) %>
-			<strong><%= @quiz.title %></strong><br>
-			Released on: <%= studentQuiz.created_at.strftime("%d %b %Y") %><br>
-			Closing date: X
-		</div>
-		<div style="align-self: right; display:inline-block; height: 100%; vertical-align: center;">
-			<strong>Live Now</strong>
-		</div></div>
+<table id="tiles">
+	<% @studentQuizzes.each do |studentQuiz| %>
+		<%= link_to quiz_pages_path(:userQuiz => studentQuiz.id) do %>
+
+			<% @status = calculate_status(studentQuiz.start_date, studentQuiz.end_date) %>
+			<% if @status == "Scheduled for Release" %>
+				<%@color = "#fcf8e3" %>
+			<% elsif @status == "Live" %>
+				<%@color = "#dff0d8"%>
+			<% elsif @status == "Closed" %>
+				<%@color = "#f2dede"%>
+			<% end %>
+
+			<div id="<%=studentQuiz.id%>" >
+			<tr style="background-color: <%=@color%>; width:100%;" data-link="<%= quiz_pages_path(:userQuiz => studentQuiz.id) %>">
+				<td style="text-align: left; padding:10px; width:100%;">
+				<% @quiz = Quiz.find(studentQuiz.quiz_id) %>
+				<strong><%= @quiz.title %></strong><br>
+				Released on: <%= studentQuiz.start_date.strftime("%d %b %Y") %><br>
+				Closing date: <%= studentQuiz.end_date.strftime("%d %b %Y") %>
+				</td>
+
+				<td style="padding-right:10px; text-align: right; width:100%;">
+					<%= @status %>
+				</td>
+			</tr>
+			</div>
 		<% end %>
-<%end%>
+	<%end%>
+</table>
+
+
+
+
+
