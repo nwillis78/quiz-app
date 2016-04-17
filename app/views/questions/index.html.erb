@@ -1,44 +1,53 @@
-<h1>Listing Questions</h1>
+<div class="panel panel-default">
 
+    <div class="panel-heading">
+      <h1 class="panel-title" style="font-size: 20px;">Listing Questions</h1>
+    </div>
 
-<div id="button_text">
-<button type = "button" class="btn btn-primary">
-<%= link_to 'New Question', new_category_question_path %></button>
-</div> 
+    <div class="panel-body">
+      <div id="button_text">
+		<button type = "button" class="btn btn-primary">
+		<%= link_to 'New Question', new_category_question_path %></button>
+		</div> 
 
-<br>
+    <br>
 
-<table class="table table-striped">
-	<tr>
-		<th>Category</th>
-		<th>Language</th>
-		<th>Question Body</th>
-	</tr>
+    <table style="width:100%;" class="index">
+      <tr>
+        <th>Category</th>
+        <th>Language</th>
+        <th>Question text</th>
+        <th colspan="3">Manage</th>
+      </tr>
 
-	<% @questions.each do |question| %>
+      <% @questions.each do |question| %>
 		<% @direction = Direction.find(question.language.direction_id).directionCode %>
-		<tr>
-			<td>
+        
+
+        <tr>
+			<td style="width:auto;">
 				<% if question.category != nil %>
 		    		<%=question.category.categoryBody%>
 		    	<% else %>
 		    		Undefined<%=question.id%>
 				<% end %>
 			</td>
-			<td>
+			<td style="width:auto;">
 		    	<%= question.language.languageName %>
 			</td>
-			<td><div dir="<%=@direction%>"><%= question.body %></div></td>
+			<td style="width:auto;"><div dir="<%=@direction%>"><%= question.body %></div></td>
 			
-			<td><button type="button" class="btn btn-default"><%= link_to 'Show', category_question_path(question.category_id, question.id) %></button></td>
+			<td style="width:5%;"><button type="button" class="btn btn-default" style="width:100%;"><%= link_to 'Show', category_question_path(question.category_id, question.id) %></button></td>
 
-			<td><button type= "button" class= "btn btn-default"><%= link_to 'Edit', edit_category_question_path(question, question.id)%></button></td>
+			<td style="width:5%;"><button type= "button" class= "btn btn-default" style="width:100%;"><%= link_to 'Edit', edit_category_question_path(question, question.id)%></button></td>
 			
-			<td><div id="button_text">
-    		<button type="button" class="btn btn-danger"><%= link_to 'Destroy', category_question_path(question.category_id, question.id),
+			<td style="width:5%;"><div id="button_text">
+    		<button type="button" class="btn btn-danger" style="width:100%;"><%= link_to 'Destroy', category_question_path(question.category_id, question.id),
 			method: :delete, 
 			data: {confirm: 'Are you sure?'} %></button>
     		</div></td>
 		</tr>
-	<% end %>
-</table>
+      <% end %>
+    </table>
+    </div>
+</div>

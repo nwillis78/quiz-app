@@ -57,13 +57,32 @@
 	</div>
 
 	<div class="field form-group">
-		<%= f.label :shuffleQuestions, "Shuffle questions" %>
-		<%= f.check_box :shuffleQuestions %>
+		
+		
 	</div>
 	<div class="field form-group">
-		<%= f.label :shuffleAnswers, "Shuffle answers" %>
-		<%= f.check_box :shuffleAnswers %>
+		
+		
 	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="margin:0px; padding:5px;"><%= f.label :shuffleQuestions, "Shuffle questions" %></td>
+				<td style="margin:0px; padding:5px; padding-bottom: 10px;"><%= f.check_box :shuffleQuestions %></td>
+			</tr>
+			<tr>
+				<td style="margin:0px; padding:5px;"><%= f.label :shuffleAnswers, "Shuffle answers" %></td>
+				<td style="margin:0px; padding:5px; padding-bottom: 10px;"><%= f.check_box :shuffleAnswers %></td>
+			</tr>
+		</tbody>
+	</table>
 
 	<div class="field form-group">
 		<%= f.label :time_allowed, class: 'control-label' %><br>
@@ -75,7 +94,9 @@
 
 	
 
-	<h2>Questions</h2>
+	<div class="inner-panel-title">
+   		Questions
+  	</div>
 
 	<p>Add questions to the quiz using the button below. You can add questions directly from the question
 	bank or create a new question.</p>
