@@ -5,22 +5,36 @@ Time remaining: <span id="countdown"></span><br>
 	<% if @quiz.shuffleQuestions %>
 		<% @quiz.questions.shuffle.each do |question| %>
 			<%= question.body %><br>
-			<% question.answers.each do |answer| %>
-				
+			<% if @quiz.shuffleAnswers %>
+				<% question.answers.shuffle.each do |answer| %>
 		       		<%= radio_button_tag("answer[#{question.id}]", answer.id) %>
 		        	<%= label("answer_".concat(answer.id.to_s).to_sym, answer.answerString) %>
-		      	<br>
+			      	<br>
+				<% end %>
+			<% else %>
+				<% question.answers.each do |answer| %>
+		       		<%= radio_button_tag("answer[#{question.id}]", answer.id) %>
+		        	<%= label("answer_".concat(answer.id.to_s).to_sym, answer.answerString) %>
+			      	<br>
+				<% end %>
 			<% end %>
 			<br><br>
 		<% end %>
 	<% else %>
 		<% @quiz.questions.each do |question| %>
 			<%= question.body %><br>
-			<% question.answers.each do |answer| %>
-				
+			<% if @quiz.shuffleAnswers %>
+				<% question.answers.shuffle.each do |answer| %>
 		       		<%= radio_button_tag("answer[#{question.id}]", answer.id) %>
 		        	<%= label("answer_".concat(answer.id.to_s).to_sym, answer.answerString) %>
-		      	<br>
+			      	<br>
+				<% end %>
+			<% else %>
+				<% question.answers.each do |answer| %>
+		       		<%= radio_button_tag("answer[#{question.id}]", answer.id) %>
+		        	<%= label("answer_".concat(answer.id.to_s).to_sym, answer.answerString) %>
+			      	<br>
+				<% end %>
 			<% end %>
 			<br><br>
 		<% end %>

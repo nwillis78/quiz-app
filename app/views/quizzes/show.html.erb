@@ -28,6 +28,14 @@
       <% end %>
     </p>
     <p>
+      <strong>Shuffle Answers:</strong> 
+      <% if @quiz.shuffleAnswers == true %>
+        True
+      <% else %>
+        False
+      <% end %>
+    </p>
+    <p>
       <strong>Time Allowed:</strong> <%= @quiz.time_allowed %> minutes
     </p>
 

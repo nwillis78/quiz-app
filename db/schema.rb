@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416140044) do
+ActiveRecord::Schema.define(version: 20160417151557) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20160416140044) do
     t.integer  "attemptsAllowed"
     t.integer  "time_allowed"
     t.boolean  "shuffleQuestions"
+    t.boolean  "shuffleAnswers"
   end
 
   add_index "quizzes", ["language_id"], name: "index_quizzes_on_language_id"

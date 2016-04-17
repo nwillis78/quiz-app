@@ -111,7 +111,7 @@ class QuizzesController < ApplicationController
     private
         def quiz_params
             params.require(:quiz).permit(:title, :description, 
-                :instructions, :attemptsAllowed, :shuffleQuestions, :time_allowed, :language_id, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
+                :instructions, :attemptsAllowed, :shuffleQuestions, :shuffleAnswers, :time_allowed, :language_id, :user, links_attributes: [:id, :quiz_id, :question_id, :question_category, :_destroy], 
                 questions_attributes: [:category_id, :body])
         end
     
