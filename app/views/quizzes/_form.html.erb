@@ -52,16 +52,16 @@
 	</div>
 
 	<div class="field form-group">
-		<%= f.label :attemptsAllowed, class: 'control-label' %><br>
+		<%= f.label :attemptsAllowed, "Number of attempts allowed (1-10)", class: 'control-label' %><br>
 		<%= f.text_field :attemptsAllowed, class: 'form-control' %>
 	</div>
 
 	<div class="field form-group">
-		<%= f.label :shuffleQuestions %>
+		<%= f.label :shuffleQuestions, "Shuffle questions" %>
 		<%= f.check_box :shuffleQuestions %>
 	</div>
 	<div class="field form-group">
-		<%= f.label :shuffleAnswers %>
+		<%= f.label :shuffleAnswers, "Shuffle answers" %>
 		<%= f.check_box :shuffleAnswers %>
 	</div>
 

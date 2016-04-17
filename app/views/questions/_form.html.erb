@@ -34,7 +34,7 @@
 
 	<div class="field form-group">
 	<p>
-		<%= f.label :body, class: 'control-label' %><br>
+		<%= f.label :body, "Question text", class: 'control-label' %><br>
 		<div id="question_body_direction" dir="<%=@direction%>">
 		<%= f.text_area :body, class: 'form-control' %>
 		</div>
@@ -48,7 +48,7 @@
 			<thead>
 				<tr>
 					<th>Answer</th>
-					<th>isCorrect</th>
+					<th>Correct</th>
 				</tr>
 			</thead>
 			<tbody id="answer_table">

@@ -17,12 +17,14 @@ class Question < ActiveRecord::Base
     validates :body, presence: true,
     length: { minimum: 3}
     
-    validates :answers, association_count: {minimum: 1}
+    
     validates_associated :answers
+    validate :has_one_correct_answer
+    validate :check_has_answer
 
     def check_has_answer
 	    if ((answers.length == 0) || (answers.reject(&:marked_for_destruction?).count == 0))
-	        self.errors.add :base, "Question must have at least one answer"
+	        errors.add(:base, "Question must have at least one answer")
 	    end
 	end
 
@@ -37,5 +39,22 @@ class Question < ActiveRecord::Base
             end
         end
     end
+
+    
+
+    def has_one_correct_answer
+        @i = 0;
+        answers.each do |answer|
+            if answer.isCorrect
+                @i+=1
+            end
+        end
+        if @i ==1
+            return true
+        else
+            errors.add(:base, "Question must have exactly 1 correct answer")
+            return false
+        end
+    end   
 
 end
