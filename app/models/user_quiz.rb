@@ -1,7 +1,7 @@
 class UserQuiz < ActiveRecord::Base
-  belongs_to :quiz
-  has_many :results, dependent: :destroy
-  validate :start_not_in_past
+    belongs_to :quiz
+    has_many :results, dependent: :destroy
+    validate :start_not_in_past
 	validate :end_not_in_past_after_start
 
   	def start_not_in_past

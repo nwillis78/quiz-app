@@ -16,7 +16,7 @@
 	<div class="field form-group">
 	<p>
 		<%= f.label :quiz_id, class: 'control-label'%>	
-		<%= f.select :quiz_id, options_from_collection_for_select(Quiz.where("user_id = ?", current_user.id), :id, :title, {:selected => @quiz.id})%>
+		<%= f.select :quiz_id, options_from_collection_for_select(@quizzes, :id, :title, {:selected => @quiz.id})%>
 
 	</p>
 	</div>

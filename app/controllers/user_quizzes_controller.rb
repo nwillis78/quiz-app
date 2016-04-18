@@ -3,6 +3,14 @@ class UserQuizzesController < ApplicationController
     helper_method :calculate_status
     
 	def new
+        @quizzes = Quiz.where("user_id = ?", current_user.id)
+        @quizzes.each do |quiz|
+            if !(UserQuiz.where("quiz_id=?", quiz.id).blank?)
+                #this quiz exists in userquizzes so remove it from collection
+                @quizzes = @quizzes.reject { |q| q.id === quiz.id}
+            end
+        end
+
 		@user_quiz = UserQuiz.new
 		if @user_quiz.quiz_id
             @quiz = Quiz.find(@user_quiz.quiz_id)

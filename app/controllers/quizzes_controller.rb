@@ -4,8 +4,14 @@ class QuizzesController < ApplicationController
 
 
     def index
+        @noQuizzes = 0
         @quizzes = Quiz.where("user_id = ?", current_user.id)
-        @noQuizzes = Quiz.where("user_id = ?", current_user.id).count
+
+        @quizzes.each do |quiz|
+            if UserQuiz.where("quiz_id=?", quiz.id).blank?
+                @noQuizzes += 1
+            end
+        end
     end
     
     def show
