@@ -2,6 +2,7 @@
   Back
 <% end %>
 <br><br>
+<% @status = calculate_status(@user_quiz.start_date, @user_quiz.end_date) %>
 <div class="panel panel-default">
   	<div class="panel-heading">
    		<h1 class="panel-title">Set Quiz Info</h1>
@@ -9,12 +10,39 @@
   	<div class="panel-body">
 		Quiz <%= @user_quiz.quiz_id %><br>
 		Student <%= @user_quiz.student_id %><br>
-		Staff <%= @user_quiz.staff_id %><br>
+		Staff <%= @user_quiz.staff_id %><br><br>
 
 		<% if @user_quiz.results.length != 0 %>
 		<div class="inner-panel-title">
+   			Available Actions
+  		</div>
+  		<% if @status == "Closed" %>
+  			<div id="button_text">
+			<button type = "button" class="btn btn-primary">
+			<%= link_to "Release Results", { :controller => "user_quizzes", :action => "release_results", :quiz_id => @user_quiz.quiz_id} %></button>
+			</div><br>
+  		<% else %>
+  			<p> This quiz hasn't finished yet. Results cannot be released.</p>
+  		<% end %>
+  		
+
+
+		<div class="inner-panel-title">
    			Results
   		</div>
+
+  		<% if @user_quiz.results_available %>
+			<% @availability = "Results available" %>
+		<% else %>
+			<% @availability = "Results are not available" %>
+		<% end %>
+
+  		<p>
+  			You can view results for each student below. General information about results is shown below:<br>
+  			<strong>Average score: </strong><%= grade(@user_quiz.id) %>%<br>
+  			<strong>% of students who took this quiz: </strong>100%<br>
+  			<strong>Results status: </strong><%= @availability %>
+  		</p>
 
 		<table style="width:100%" class="index">
 		  <tr>

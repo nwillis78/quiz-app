@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   get 'quizzes/update_quizzes_direction', as: 'update_quizzes_direction'
   resources :quizzes
   get 'questions/update_questions_direction', as: 'update_questions_direction'
-  
-
+  get "user_quiz/release_results" => "user_quizzes#release_results"
   
   resources :categories do
       resources :questions do
@@ -34,6 +33,8 @@ Rails.application.routes.draw do
   resources :languages do
       resources :directions
   end
+  
+  
   
   resources :quiz_pages
   get 'quizzes/take'

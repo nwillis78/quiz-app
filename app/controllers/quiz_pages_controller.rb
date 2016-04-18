@@ -1,5 +1,5 @@
 class QuizPagesController < ApplicationController
-	
+	helper_method :grade
 
 	def index
 		@quiz = Quiz.find(UserQuiz.find(params[:userQuiz]).quiz_id)
@@ -22,6 +22,13 @@ class QuizPagesController < ApplicationController
 
   		@time_started = @userQuiz.time_started
   		@time_allowed = @quiz.time_allowed
+	end
+
+	def show
+		@userQuiz = UserQuiz.find(params[:id])
+        @quiz = Quiz.find(@userQuiz.quiz_id)
+        @direction = Direction.find(@quiz.language.direction_id).directionCode 
+        @results = Result.where("user_quiz_id = ?", @userQuiz.id)
 	end
 
 	def grading
@@ -77,6 +84,26 @@ class QuizPagesController < ApplicationController
 
 		redirect_to root_path
 	end
+
+	 def grade(userQuizId) #also in user quizzes controller
+        @userQuiz = UserQuiz.find(userQuizId)
+        @quiz = Quiz.find(@userQuiz.quiz_id)
+        @noQuestions = @quiz.links.length
+        @results = Result.where("user_quiz_id = ?", @userQuiz.id)
+
+        @i = 0
+
+        @results.each do |result|
+            if result.chosen_answer != nil
+                @answer = Answer.find(result.chosen_answer)
+                if @answer.isCorrect
+                    @i += 1
+                end
+            end
+        end
+
+        return @i * 100 / @noQuestions
+    end
 
 
 end

@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   	@studentQuizzes = UserQuiz.where("student_id = ?", current_user.id)
   end
 
-  	def calculate_status(start_date, end_date)
+  	def calculate_status(start_date, end_date) #this method is also in the user quizzes controller
 		if Date.today.between?(start_date, end_date)
 		  return "Live"
 		else

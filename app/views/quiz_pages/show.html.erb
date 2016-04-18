@@ -1,0 +1,73 @@
+<%= link_to root_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+<br><br>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+        <h1 class="panel-title">Results</h1>
+      </div>
+      <div class="panel-body">
+        <strong>Final score: </strong><%= grade(@userQuiz.id) %>%<br>
+        <strong>Number of attempts: </strong><%= @userQuiz.attemptsTaken %>
+
+        <p>
+          Please view the details of your answers below. Your answers are shown in blue, correct answers are shown in green.
+        </p>
+      </div>
+
+
+  	<% @i=0 %>
+  	<% @quiz.questions.each do |question| %>
+  		<% @i = @i+1 %>
+  		<div class="panel-heading">
+   			<h1 class="panel-title">Question <%= @i %></h1>
+  		</div>
+  		<div class="panel-body">
+    		<p>
+				<strong>Category:</strong> <%= question.category.categoryBody %>
+			</p>
+			<p>
+				<div dir="<%=@direction%>"><%= question.body %></div>
+			</p>
+				<strong>Answers:</strong>
+  		</div>
+  		
+      <% @result = Result.where("user_quiz_id = ?", @userQuiz.id).where("question_id=?", question.id).first %>
+      <% if @result != nil %>
+        <% @chosenAnswerId = @result.chosen_answer %>
+      <% else %>
+        <% @chosenAnswerId = nil %>
+      <% end %>
+
+  		<% question.answers.each do |answer| %>
+  			<%if @direction == "LTR" %>
+      <% if answer.id == @chosenAnswerId && answer.isCorrect %>
+        <li class="list-group-item list-group-item-info"><div style="float:right;">Correct</div><%= answer.answerString %></li>
+      <% elsif answer.id == @chosenAnswerId %>
+       <li class="list-group-item list-group-item-info"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
+      <% elsif  answer.isCorrect %>
+        <li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
+      <% else %>
+        <li class="list-group-item list-group-item-default"><div style="float:right;">Incorrect</div><%= answer.answerString %></li>
+      <% end %>
+    <% else %>
+      <div dir="RTL">
+
+      <% if answer.id == @chosenAnswerId && answer.isCorrect %>
+        <li class="list-group-item list-group-item-info"><div style="float:left;">Correct</div><%= answer.answerString %></li>
+      <% elsif answer.id == @chosenAnswerId %>
+       <li class="list-group-item list-group-item-info"><div style="float:left;">Incorrect</div><%= answer.answerString %></li>
+      <% elsif  answer.isCorrect %>
+        <li class="list-group-item list-group-item-success"><div style="float:left;">Correct</div><%= answer.answerString %></li>
+      <% else %>
+         <li class="list-group-item list-group-item-default"><div style="float:left;">Incorrect</div><%= answer.answerString %></li>
+      <% end %>
+
+      </div>
+    <% end %>
+  		<% end %>
+  	<% end %>
+  	
+  </ul>
+</div>
