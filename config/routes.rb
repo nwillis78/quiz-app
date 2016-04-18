@@ -23,7 +23,13 @@ Rails.application.routes.draw do
   
   resources :links
   
-  resources :user_quizzes
+  
+  resources :user_quizzes do
+      collection do
+          get 'student_detail'
+      end
+      resources :results
+  end
   
   resources :languages do
       resources :directions
@@ -40,7 +46,8 @@ Rails.application.routes.draw do
   
   #get 'questions/update_questions?category_id' => 'questions#update_questions', as: 'update_questions', :format => :json
   get 'questions/show_questions'
-  post 'quiz_pages/grading'
+  post 'quiz_pages/grading' #delete this if not using grading method
+  post 'quiz_pages/save_results'
  
   
   

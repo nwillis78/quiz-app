@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chosen_answer: 1
+  user_quiz_id: 
+
+two:
+  chosen_answer: 1
+  user_quiz_id: 

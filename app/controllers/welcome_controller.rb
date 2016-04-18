@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
 		else
 		  if Date.today < start_date
 		  	return "Scheduled for Release"
-		  elsif end_date > Date.today
+		  elsif end_date < Date.today
 		  	return "Closed"
 		  end
 		end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417151557) do
+ActiveRecord::Schema.define(version: 20160418100514) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -91,13 +91,22 @@ ActiveRecord::Schema.define(version: 20160417151557) do
   add_index "quizzes", ["language_id"], name: "index_quizzes_on_language_id"
   add_index "quizzes", ["user_id"], name: "index_quizzes_on_user_id"
 
+  create_table "results", force: :cascade do |t|
+    t.integer  "chosen_answer"
+    t.integer  "user_quiz_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "question_id"
+  end
+
+  add_index "results", ["user_quiz_id"], name: "index_results_on_user_quiz_id"
+
   create_table "user_quizzes", force: :cascade do |t|
     t.integer  "quiz_id"
     t.integer  "staff_id"
     t.integer  "student_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "result"
     t.integer  "attemptsTaken"
     t.datetime "time_started"
     t.date     "start_date"

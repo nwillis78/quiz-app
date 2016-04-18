@@ -11,18 +11,24 @@
 		Student <%= @user_quiz.student_id %><br>
 		Staff <%= @user_quiz.staff_id %><br>
 
-		<% if @user_quiz.result != nil %>
-		<strong>Results</strong>
-		<table style="width:100%">
+		<% if @user_quiz.results.length != 0 %>
+		<div class="inner-panel-title">
+   			Results
+  		</div>
+
+		<table style="width:100%" class="index">
 		  <tr>
 		    <td>Student</td>
 		    <td>Result</td> 
 		    <td>Attempts Taken</td>
+		    <td></td>
 		  </tr>
 		  <tr>
-		    <td><%= User.find(@user_quiz.student_id).username %></td>
-		    <td><%= @user_quiz.result %>%</td> 
-		    <td><%= @user_quiz.attemptsTaken %></td>
+		    <td style="width:auto;"><%= User.find(@user_quiz.student_id).username %></td>
+		    <td style="width:auto;"><%= grade(@user_quiz.id) %>%</td> 
+		    <td style="width:auto;"><%= @user_quiz.attemptsTaken %></td>
+		    <td style="width:5%;"><button type = "button" class="btn btn-default">
+			<%= link_to 'View Answers', student_detail_user_quizzes_path(:id => @user_quiz.id) %></button></td>
 		  </tr>
 		</table>
 		<% else %>

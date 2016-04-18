@@ -55,5 +55,28 @@ class QuizPagesController < ApplicationController
 		redirect_to root_path
 	end
 
+	def save_results
+		@userQuiz = UserQuiz.find(params[:userQuiz])
+		answers = params[:answer]
+
+		#an attempt is being saved, it is possible that data from previous attempts still exists
+		#before saving anything new wipe existing results from the db
+		@oldResults = Result.where("user_quiz_id = ?", @userQuiz.id)
+
+		@oldResults.each do |oldResult|
+			oldResult.destroy
+		end
+
+		answers.values.each do |answer|
+			@answer = answer ? Answer.find(answer) : nil
+			Result.create(
+			    :user_quiz_id => @userQuiz.id, 
+			    :chosen_answer => @answer.id,
+			    :question_id => @answer.question_id)
+		end
+
+		redirect_to root_path
+	end
+
 
 end

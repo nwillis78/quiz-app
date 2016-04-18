@@ -1,6 +1,6 @@
 Time remaining: <span id="countdown"></span><br>
 
-<%= form_tag({:id => 'quiz_form', :controller => "quiz_pages", :action => "grading"}) do%>
+<%= form_tag({:id => 'quiz_form', :controller => "quiz_pages", :action => "save_results"}) do%>
 <div dir="<%=@direction%>">
 	<% if @quiz.shuffleQuestions %>
 		<% @quiz.questions.shuffle.each do |question| %>

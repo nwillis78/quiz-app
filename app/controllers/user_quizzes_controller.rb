@@ -1,4 +1,5 @@
 class UserQuizzesController < ApplicationController
+    helper_method :grade
     
 	def new
 		@user_quiz = UserQuiz.new
@@ -53,8 +54,35 @@ class UserQuizzesController < ApplicationController
         end
     end
 
+    def grade(userQuizId)
+        @userQuiz = UserQuiz.find(userQuizId)
+        @quiz = Quiz.find(@userQuiz.quiz_id)
+        @noQuestions = @quiz.links.length
+        @results = Result.where("user_quiz_id = ?", @userQuiz.id)
+
+        @i = 0
+
+        @results.each do |result|
+            if result.chosen_answer != nil
+                @answer = Answer.find(result.chosen_answer)
+                if @answer.isCorrect
+                    @i += 1
+                end
+            end
+        end
+
+        return @i * 100 / @noQuestions
+    end
+
+    def student_detail
+        @userQuiz = UserQuiz.find(params[:id])
+        @quiz = Quiz.find(@userQuiz.quiz_id)
+        @direction = Direction.find(@quiz.language.direction_id).directionCode 
+        @results = Result.where("user_quiz_id = ?", @userQuiz.id)
+    end
+
     private
         def user_quiz_params
-            params.require(:user_quiz).permit(:quiz_id, :student_id, :start_date, :end_date, :result, :attemptsTaken)
+            params.require(:user_quiz).permit(:quiz_id, :student_id, :start_date, :end_date, :attemptsTaken)
         end
 end
