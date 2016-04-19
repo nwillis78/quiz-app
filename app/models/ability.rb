@@ -57,6 +57,17 @@ class Ability
         quiz.try(:user) == user
       end
 
+      can :read, Group do |group|
+        group.try(:user) == user
+      end
+      can :create, Group
+      can :update, Group do |group|
+        group.try(:user) == user
+      end
+      can :destroy, Group do |group|
+        group.try(:user) == user
+      end
+
       
   		
       can :manage, Answer

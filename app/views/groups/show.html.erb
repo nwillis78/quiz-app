@@ -1,0 +1,16 @@
+<%= link_to groups_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+  Back
+<% end %>
+<br><br>
+<div class="panel panel-default">
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Group Info</h1>
+  	</div>
+  	<div class="panel-body">
+		<%= @group.name %><br>
+  	</div>
+</div>
+
+
+<button type = "button" class="btn btn-default">
+<%= link_to 'Edit', edit_group_path(@group) %></button>

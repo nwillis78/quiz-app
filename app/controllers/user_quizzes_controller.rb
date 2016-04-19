@@ -47,6 +47,7 @@ class UserQuizzesController < ApplicationController
 
     def edit
         @user_quiz = UserQuiz.find(params[:id])
+        @quizzes = Quiz.where("user_id = ?", current_user.id).where("id = ?",@user_quiz.quiz_id)
         if @user_quiz.quiz_id
             @quiz = Quiz.find(@user_quiz.quiz_id)
         else

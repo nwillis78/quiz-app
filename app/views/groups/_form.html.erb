@@ -1,0 +1,34 @@
+<%= form_for @group do |f| %>
+
+  <% if @group.errors.any? %>
+    <div id="error_explanation" class = "alert alert-danger">
+      <h2>
+        <%= pluralize(@group.errors.count, "error") %> prohibited
+        this group from being saved:
+      </h2>
+      <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+  <p>
+    <%= f.label :name, "Name" %><br>
+    <%= f.text_field :name %>
+  </p>
+  </div>
+
+  <br>
+ 
+   <div class="actions form-group" id="button_text">
+    <p>
+    <%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
+    Submit
+    <% end %>
+    </p>
+    </div>
+ 
+<% end %>

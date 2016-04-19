@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   
   resources :links
   
+  resources :groups
+  
   
   resources :user_quizzes do
       collection do

@@ -39,6 +39,7 @@
               <li class="<%= 'active' if params[:controller] == 'questions' %>"><%= link_to 'Question Bank', category_questions_path(Question.all)%></li>
               <li class="<%= 'active' if current_page?(categories_path) %>"><%= link_to 'Question Categories', categories_path %></li>
               <li class="<%= 'active' if current_page?(languages_path) %>"><%= link_to 'Languages', languages_path %></li>
+              <li class="<%= 'active' if current_page?(groups_path) %>"><%= link_to 'Groups', groups_path %></li>
             </ul>
 
 
