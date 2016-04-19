@@ -68,6 +68,17 @@ class Ability
         group.try(:user) == user
       end
 
+      can :read, Member do |member|
+        member.try(:user) == user
+      end
+      can :create, Member
+      can :update, Member do |member|
+        member.try(:user) == user
+      end
+      can :destroy, Member do |member|
+        member.try(:user) == user
+      end
+
       
   		
       can :manage, Answer

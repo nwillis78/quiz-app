@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   
   resources :links
   
-  resources :groups
+  resources :groups do
+      resources :members
+  end
   
   
   resources :user_quizzes do
