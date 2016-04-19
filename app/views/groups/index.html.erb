@@ -22,7 +22,7 @@
       <% @groups.each do |group| %>
         <tr>
           <td style="width:auto;"><%= group.name %></td>
-          <td style="width:auto;"><%= 0 %></td>
+          <td style="width:auto;"><%= group.members.count %></td>
           
           <td style="width:5%;"><button type="button" class="btn btn-default" style="width:100%;"><%= link_to 'Show', group_path(group) %></button></td>
 

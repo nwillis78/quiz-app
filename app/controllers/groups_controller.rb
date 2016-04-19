@@ -20,9 +20,10 @@ class GroupsController < ApplicationController
 
 	def create
   		@group = Group.new(group_params)
-      	@group.staff_id = current_user.id
+      @group.staff_id = current_user.id
  
   		if @group.save
+        Group.import(params[:file])
     		redirect_to @group
   		else
     		render 'new'
@@ -50,9 +51,13 @@ class GroupsController < ApplicationController
         end
 	end
 
+  def import
+    Group.import(params[:file])
+  end
+
 	private
   		def group_params
-    		params.require(:group).permit(:name)
+    		params.require(:group).permit(:name, :file)
   		end
 
 end

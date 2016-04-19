@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :links
   
   resources :groups do
+      collection { post :import }
       resources :members
   end
   
