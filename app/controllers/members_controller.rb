@@ -14,6 +14,13 @@ class MembersController < ApplicationController
 	def destroy
   		@member = Member.find(params[:id])
   		@member.destroy
+
+  		@group = Group.find(params[:group_id])
+  		if @member.destroyed?
+            redirect_to @group
+        else
+            redirect_to @group, :flash => { :danger => "Error: #{@member.errors[:base][0].to_s}" }
+        end
 	end
 
 	private

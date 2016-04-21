@@ -17,6 +17,7 @@ class GroupsController < ApplicationController
 
 	def edit
   		@group = Group.find(params[:id])
+      @members = @group.members
 	end
 
 	def create
@@ -31,7 +32,7 @@ class GroupsController < ApplicationController
 	end
  
 	def update
-  		@group = Language.find(params[:id])
+  		@group = Group.find(params[:id])
  
   		if @group.update(group_params)
     		redirect_to @group
@@ -52,6 +53,7 @@ class GroupsController < ApplicationController
 	end
 
   def upload
+    require 'csv'
     @group = Group.find(params[:id])
     uploaded_io = params[:file].tempfile
     csv_text = File.read(uploaded_io)

@@ -5,8 +5,15 @@
   	</div>
   	<div class="panel-body">
 		<%= form_tag({action: :upload, :id => @group.id}, multipart: true) do %>
-		  <%= file_field_tag 'file' %>
-		  <%= submit_tag "Import CSV" %>
+		  <%= file_field_tag 'file' %> <br>
+
+		  <div class="actions form-group" id="button_text">
+	<p>
+	<%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
+ 	Import CSV
+	<% end %>
+	</p>
+	</div>
 		<% end %>
   	</div>
 </div>

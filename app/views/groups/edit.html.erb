@@ -7,6 +7,68 @@
    		<h1 class="panel-title">Edit Group</h1>
   	</div>
   	<div class="panel-body">
-		<%= render 'form' %>
+		<% if @group.errors.any? %>
+	    <div id="error_explanation" class = "alert alert-danger">
+		      <h3>
+		        <%= pluralize(@group.errors.count, "error") %> prohibited
+		       	this group from being updated:
+		      </h3>
+			      <ul>
+			        <% @group.errors.full_messages.each do |msg| %>
+			          <li><%= msg %></li>
+			        <% end %>
+			      </ul>
+	    </div>
+	<% end %>
+	<%= form_for @group, multipart: true do |f| %>
+		<div class="field form-group">
+		  <p>
+		    <%= f.label :name, "Group Name" %><br>
+		    <%= f.text_field :name %>
+		  </p>
+		  </div>
+
+		  <div class="actions form-group" id="button_text">
+		<p>
+		<%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
+	 	Submit
+		<% end %>
+		</p>
+		</div>
+  		</div>
+
+
+
+  		<div class="panel-heading">
+   		<h1 class="panel-title">Members</h1>
   	</div>
+  	<div class="panel-body">
+  	<p>
+  		You can view existing members below. Individual members can be removed from the group.
+  	</p>
+  	<table style="width:100%;" class="index">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Full name</th>
+        <th>Remove</th>
+      </tr>
+
+      <% @members.each do |member| %>
+      	<% @user = User.find(member.student_id) %>
+        <tr>
+          <td style="width:auto;"><%= @user.uid %></td>
+          <td style="width:auto;"><%= @user.email %></td>
+          <td style="width:auto;"><%= @user.givenname %> <%= @user.sn %></td>
+          <td style="width:5%;"><div id="button_text">
+            <button type="button" class="btn btn-danger" style="width:100%;"><%= link_to 'Remove', group_member_path(member.group_id, member.id),
+          method: :delete, 
+          data: {confirm: 'Are you sure?'} %></button>
+            </div></td>
+          
+        </tr>
+      <% end %>
+    </table></div>
+</div>
+  	<% end %>
 </div>
