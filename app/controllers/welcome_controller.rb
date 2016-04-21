@@ -3,7 +3,26 @@ class WelcomeController < ApplicationController
   helper_method :calculate_status
   
   def index
-  	@userQuizzes = UserQuiz.where("staff_id = ?", current_user.id)
+  	#for the staff index display need to only return one item per group
+  	 @allUserQuizzes = UserQuiz.where("staff_id = ?", current_user.id)
+  	 @userQuizzes = UserQuiz.none
+  	 @allUserQuizzes.each do |userQuiz|
+  	 	@matches = @userQuizzes.where("group_id = ?", userQuiz.group_id).where("quiz_id = ?", userQuiz.quiz_id)
+  	
+  	 	if @matches.count == 0
+  	 		@new = @allUserQuizzes.where("group_id = ?", userQuiz.group_id).where("quiz_id = ?", userQuiz.quiz_id).first
+
+  	 		@array = @userQuizzes + Array(@new)
+			@userQuizzes = UserQuiz.where(:id => @array)
+  	 	end
+  	 end
+
+
+
+  	
+
+
+
   	@studentQuizzes = UserQuiz.where("student_id = ?", current_user.id)
   end
 

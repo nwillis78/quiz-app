@@ -8,11 +8,13 @@
    		<h1 class="panel-title">Set Quiz Info</h1>
   	</div>
   	<div class="panel-body">
-		Quiz <%= @user_quiz.quiz_id %><br>
-		Student <%= @user_quiz.student_id %><br>
-		Staff <%= @user_quiz.staff_id %><br><br>
+		<strong>Quiz: </strong> <%= @quiz.title %><br>
+		<strong>Group: </strong> <%= @group.name %>
 
-		<% if @user_quiz.results.length != 0 %>
+		<p>
+			The members in this group are displayed in the table below, along with their ongoing quiz statistics.
+		</p>
+
 		<div class="inner-panel-title">
    			Available Actions
   		</div>
@@ -24,10 +26,8 @@
   		<% else %>
   			<p> This quiz hasn't finished yet. Results cannot be released.</p>
   		<% end %>
-  		
 
-
-		<div class="inner-panel-title">
+  		<div class="inner-panel-title">
    			Results
   		</div>
 
@@ -38,30 +38,43 @@
 		<% end %>
 
   		<p>
-  			You can view results for each student below. General information about results is shown below:<br>
-  			<strong>Average score: </strong><%= grade(@user_quiz.id) %>%<br>
-  			<strong>% of students who took this quiz: </strong>100%<br>
+  			You can view results for each student in the table. General information about results is shown below:<br>
+  			<strong>Average score: </strong><%= @average_score %>%<br>
+  			<strong>% of students who took this quiz: </strong><%=@percent_complete %>%<br>
   			<strong>Results status: </strong><%= @availability %>
-  		</p>
+  		</p><br>
 
-		<table style="width:100%" class="index">
-		  <tr>
-		    <td>Student</td>
-		    <td>Result</td> 
-		    <td>Attempts Taken</td>
-		    <td></td>
-		  </tr>
-		  <tr>
-		    <td style="width:auto;"><%= User.find(@user_quiz.student_id).username %></td>
-		    <td style="width:auto;"><%= grade(@user_quiz.id) %>%</td> 
-		    <td style="width:auto;"><%= @user_quiz.attemptsTaken %></td>
-		    <td style="width:5%;"><button type = "button" class="btn btn-default">
+  		<div class="inner-panel-title">
+   			Students
+  		</div>
+		<table style="width:100%;" class="index">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Full name</th>
+        <th>Result</th>
+        <th>Attempts Taken</th>
+        <th>Results Available</th>
+        <th></th>
+      </tr>
+
+      <% @group.members.each do |member| %>
+      	<% @user = User.find(member.student_id) %>
+      	<% @userQuiz = UserQuiz.where("student_id = ?", @user.id).where("quiz_id = ?", @quiz.id).where("group_id=?",@group.id).first %>
+
+        <tr>
+          <td style="width:auto;"><%= @user.uid %></td>
+          <td style="width:auto;"><%= @user.email %></td>
+          <td style="width:auto;"><%= @user.givenname %> <%= @user.sn %></td>
+          <td style="width:auto;"><%= grade(@userQuiz.id) %>%</td>
+          <td style="width:auto;"><%= @userQuiz.attemptsTaken %></td>
+          <td style="width:auto;"><%= @userQuiz.results_available %></td>
+          <td style="width:5%;"><button type = "button" class="btn btn-default">
 			<%= link_to 'View Answers', student_detail_user_quizzes_path(:id => @user_quiz.id) %></button></td>
-		  </tr>
-		</table>
-		<% else %>
-			This quiz has not been taken yet
-		<% end %>
+          
+        </tr>
+      <% end %>
+    </table>
   	</div>
 </div>
 

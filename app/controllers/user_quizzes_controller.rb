@@ -17,6 +17,11 @@ class UserQuizzesController < ApplicationController
         else
             @quiz = Quiz.where("user_id = ?", current_user.id).first
         end
+        if @user_quiz.group_id
+            @group = Group.find(@user_quiz.group_id)
+        else
+            @group = Group.where("staff_id = ?", current_user.id).first
+        end
         #If a quiz doesn't exist then this must be created before going to this page
         if @quiz == nil
             redirect_to root_path, :flash => { :warning => "You must create a quiz before you can set it" }
@@ -24,25 +29,49 @@ class UserQuizzesController < ApplicationController
 	end
 
 	def create
-        @user_quiz = UserQuiz.new(user_quiz_params)
-        @user_quiz.staff_id = current_user.id
-        @user_quiz.attemptsTaken = 0
-        @user_quiz.results_available = false
-        if @user_quiz.quiz_id
-            @quiz = Quiz.find(@user_quiz.quiz_id)
-        else
-            @quiz = Quiz.where("user_id = ?", current_user.id).first
+        #first get all the ids that the quiz needs to be assigned to
+        @group = Group.find(params[:user_quiz][:group_id])
+        @members = @group.members
+        #for each member of the group create a user quiz object
+        @members.each do |member|
+            @user_quiz = UserQuiz.new(user_quiz_params)
+            @user_quiz.staff_id = current_user.id
+            @user_quiz.student_id = member.student_id
+            @user_quiz.attemptsTaken = 0
+            @user_quiz.results_available = false
+            if @user_quiz.quiz_id
+                @quiz = Quiz.find(@user_quiz.quiz_id)
+            else
+                @quiz = Quiz.where("user_id = ?", current_user.id).first
+            end
+
+            if !@user_quiz.save
+                render 'new'
+            end
         end
-        
-        if @user_quiz.save
-            redirect_to @user_quiz
-        else
-            render 'new'
-        end
+
+        redirect_to root_path
     end
 
     def show
     	@user_quiz = UserQuiz.find(params[:id])
+        @userQuizzes = UserQuiz.where("staff_id = ?", @user_quiz.staff_id).where("quiz_id = ?", @user_quiz.quiz_id)
+        .where("group_id = ?", @user_quiz.group_id)
+        @quiz = Quiz.find(@user_quiz.quiz_id)
+        @group = Group.find(@user_quiz.group_id)
+
+        #% of students who took the quiz
+        @x = (@userQuizzes.count - @userQuizzes.where("attemptsTaken = ?",0).count) * 100
+        @y = @userQuizzes.count
+        @percent_complete = @x/@y
+
+        #average score
+        @total = 0
+        @userQuizzes.each do |userQuizI|
+            @total += grade(userQuizI.id)
+        end
+        @average_score = @total/@userQuizzes.count
+
     end
 
     def edit
@@ -117,6 +146,6 @@ class UserQuizzesController < ApplicationController
 
     private
         def user_quiz_params
-            params.require(:user_quiz).permit(:quiz_id, :student_id, :start_date, :end_date, :attemptsTaken, :results_available)
+            params.require(:user_quiz).permit(:quiz_id, :group_id, :start_date, :end_date, :attemptsTaken, :results_available)
         end
 end

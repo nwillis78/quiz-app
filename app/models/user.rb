@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     if self.dn
   	 roleString = self.dn.split(',')[2].downcase
     else 
-      roleString = self.role
+      return false
     end
 
     self.role = roleString

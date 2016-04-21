@@ -18,7 +18,7 @@
 				<strong><%= @quiz.title %></strong><br>
 				Released on: <%= userQuiz.start_date.strftime("%d %b %Y") %><br>
 				Closing date: <%= userQuiz.end_date.strftime("%d %b %Y") %><br>
-				% of students who have taken quiz: X
+				Assigned to group: <%= Group.find(userQuiz.group_id).name %>
 				</td>
 
 				<td style="padding-right:10px; text-align: right; width:100%;">

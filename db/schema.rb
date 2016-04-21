@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419192540) do
+ActiveRecord::Schema.define(version: 20160421130118) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answerString"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20160419192540) do
     t.date     "start_date"
     t.date     "end_date"
     t.boolean  "results_available"
+    t.integer  "group_id"
   end
 
   add_index "user_quizzes", ["quiz_id"], name: "index_user_quizzes_on_quiz_id"
