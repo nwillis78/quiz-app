@@ -1,0 +1,12 @@
+
+<div class="panel panel-default">
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Add Members to the group "<%=@group.name%>"</h1>
+  	</div>
+  	<div class="panel-body">
+		<%= form_tag({action: :upload, :id => @group.id}, multipart: true) do %>
+		  <%= file_field_tag 'file' %>
+		  <%= submit_tag "Import CSV" %>
+		<% end %>
+  	</div>
+</div>

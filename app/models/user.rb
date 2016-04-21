@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
   has_many :language
 
   def assign_role
-  	roleString = self.dn.split(',')[2].downcase
+    if self.dn
+  	 roleString = self.dn.split(',')[2].downcase
+    else 
+      roleString = self.role
+    end
 
     self.role = roleString
 

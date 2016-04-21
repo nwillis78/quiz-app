@@ -1,45 +1,6 @@
-<%= form_for @group, multipart: true do |f| %>
-
-  <% if @group.errors.any? %>
-    <div id="error_explanation" class = "alert alert-danger">
-      <h2>
-        <%= pluralize(@group.errors.count, "error") %> prohibited
-        this group from being saved:
-      </h2>
-      <ul>
-        <% @group.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field form-group">
-  <p>
-    <%= f.label :name, "Name" %><br>
-    <%= f.text_field :name %>
-  </p>
-  </div>
-
-  <div>
-    <div class="inner-panel-title">
-      Import a CSV file
-    </div>
-    <p>
-      Use MOLE to generate a CSV file of all students in a group. Upload the file here to be able to assign quizzes to the whole group at once.
-    </p>
-    <%= file_field_tag :file %><br>
-
-  </div>
-
-  <br>
- 
-   <div class="actions form-group" id="button_text">
-    <p>
-    <%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
-    Submit
-    <% end %>
-    </p>
-    </div>
- 
+<%= form_tag({action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'file' %>
+  <%= submit_tag "Import CSV" %>
 <% end %>
+
+

@@ -1,15 +1,39 @@
 <%= link_to groups_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
   Back
-<% end %>
+<% end %> 
 <br><br>
 <div class="panel panel-default">
   	<div class="panel-heading">
    		<h1 class="panel-title">Group Info</h1>
   	</div>
   	<div class="panel-body">
-		<%= @group.name %><br>
+    	<p>
+			<strong>Name:</strong> <%= @group.name %>
+		</p>
   	</div>
+  	<div class="panel-heading">
+   		<h1 class="panel-title">Members</h1>
+  	</div>
+  	<div style="padding-left:15px; padding-right: 15px;">
+  	<table style="width:100%;" class="index">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Full name</th>
+      </tr>
+
+      <% @members.each do |member| %>
+      	<% @user = User.find(member.student_id) %>
+        <tr>
+          <td style="width:auto;"><%= @user.uid %></td>
+          <td style="width:auto;"><%= @user.email %></td>
+          <td style="width:auto;"><%= @user.givenname %> <%= @user.sn %></td>
+          
+        </tr>
+      <% end %>
+    </table></div>
 </div>
+
 
 
 <button type = "button" class="btn btn-default">

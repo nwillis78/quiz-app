@@ -7,6 +7,39 @@
    		<h1 class="panel-title">New Group</h1>
   	</div>
   	<div class="panel-body">
-		<%= render 'form' %>
+		<%= form_for @group, multipart: true do |f| %>
+
+		  <% if @group.errors.any? %>
+		    <div id="error_explanation" class = "alert alert-danger">
+		      <h2>
+		        <%= pluralize(@group.errors.count, "error") %> prohibited
+		        this group from being saved:
+		      </h2>
+		      <ul>
+		        <% @group.errors.full_messages.each do |msg| %>
+		          <li><%= msg %></li>
+		        <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+
+		  <p>
+		  	First you must give the group a name, you will then be redirected to a .csv upload page.
+		  </p>
+		  <div class="field form-group">
+		  <p>
+		    <%= f.label :name, "Name" %><br>
+		    <%= f.text_field :name %>
+		  </p>
+		  </div>
+
+		  <div class="actions form-group" id="button_text">
+		    <p>
+		    <%= button_tag(type: 'submit', class: "btn btn-primary button-submit") do %>
+		    Create 
+		    <% end %>
+		    </p>
+		    </div>
+		<% end %>
   	</div>
 </div>
