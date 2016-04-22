@@ -3,13 +3,33 @@
 <% end %>
 <br><br>
 <% @status = calculate_status(@user_quiz.start_date, @user_quiz.end_date) %>
+<% if @status == "Scheduled for Release" %>
+				<%@color = "#fcf8e3" %>
+			<% elsif @status == "Live" %>
+				<%@color = "#dff0d8"%>
+			<% elsif @status == "Closed" %>
+				<%@color = "#f2dede"%>
+			<% end %>
 <div class="panel panel-default">
   	<div class="panel-heading">
    		<h1 class="panel-title">Set Quiz Info</h1>
   	</div>
+  	<div style="text-align: center; padding:10px; background-color: <%=@color%>;"><%=@status%>
+  		</div>
   	<div class="panel-body">
-		<strong>Quiz: </strong> <%= @quiz.title %><br>
-		<strong>Group: </strong> <%= @group.name %>
+  		
+		
+
+		<table style="width:15%;">
+		<tr>
+			<td><strong>Quiz: </strong> <%= @quiz.title %></td>
+			<td style="width:5%;"><button type="button" class="btn btn-default" style="width:100%;"><%= link_to 'View', quiz_path(@quiz) %></button></td>
+		</tr>
+		<tr>
+			<td><strong>Group: </strong> <%= @group.name %></td>
+			<td style="width:5%;"><button type="button" class="btn btn-default" style="width:100%;"><%= link_to 'View', group_path(@group) %></button></td>
+		</tr>
+		</table>
 
 		<p>
 			The members in this group are displayed in the table below, along with their ongoing quiz statistics.
@@ -18,11 +38,14 @@
 		<div class="inner-panel-title">
    			Available Actions
   		</div>
-  		<% if @status == "Closed" %>
+  		<% @results_available = @user_quiz.results_available %>
+  		<% if ((@status == "Closed") && (@results_available==false)) %>
   			<div id="button_text">
 			<button type = "button" class="btn btn-primary">
 			<%= link_to "Release Results", { :controller => "user_quizzes", :action => "release_results", :quiz_id => @user_quiz.quiz_id} %></button>
 			</div><br>
+		<% elsif ((@status == "Closed") && (@results_available==true)) %>
+			<p> This quiz has finished and you have already released the results. Not further actions can be taken.</p>
   		<% else %>
   			<p> This quiz hasn't finished yet. Results cannot be released.</p>
   		<% end %>
@@ -68,7 +91,11 @@
           <td style="width:auto;"><%= @user.givenname %> <%= @user.sn %></td>
           <td style="width:auto;"><%= grade(@userQuiz.id) %>%</td>
           <td style="width:auto;"><%= @userQuiz.attemptsTaken %></td>
-          <td style="width:auto;"><%= @userQuiz.results_available %></td>
+          <td style="width:auto;"><%if @userQuiz.results_available %>
+          							Yes
+          							<% else %>
+          							No
+          							<% end %></td>
           <td style="width:5%;"><button type = "button" class="btn btn-default">
 			<%= link_to 'View Answers', student_detail_user_quizzes_path(:id => @user_quiz.id) %></button></td>
           
@@ -77,6 +104,3 @@
     </table>
   	</div>
 </div>
-
-<button type = "button" class="btn btn-default">
-<%= link_to 'Edit', edit_user_quiz_path %></button>

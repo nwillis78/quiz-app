@@ -135,11 +135,14 @@ class UserQuizzesController < ApplicationController
 
     def release_results
         @quiz = Quiz.find(params[:quiz_id])
-        @userQuizzes = UserQuiz.where("quiz_id = ?", @quiz.id).where("staff_id = ?", current_user.id)
 
+        @userQuizzes = UserQuiz.where("quiz_id = ?", @quiz.id).where("staff_id = ?", current_user.id)
         @userQuizzes.each do |userQuiz|
             userQuiz.results_available = true
-            userQuiz.save
+            if userQuiz.save(validate: false)
+            else
+                raise userQuiz.errors.inspect
+            end
         end
         redirect_to :back
     end
