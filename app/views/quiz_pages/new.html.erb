@@ -1,9 +1,20 @@
-Time remaining: <span id="countdown"></span><br>
+<div class="panel panel-default">
+<div class="panel-body">
+
+<div style="text-align: center; font-size: 140%;">
+Time remaining: <span id="countdown"></span>
+</div><br>
 
 <%= form_tag({:id => 'quiz_form', :controller => "quiz_pages", :action => "save_results"}) do%>
 <div dir="<%=@direction%>">
+<% @i = 0 %>
 	<% if @quiz.shuffleQuestions %>
 		<% @quiz.questions.shuffle.each do |question| %>
+			<% @i += 1 %>
+			<div class="panel-heading" style="background-color: #f2f2f2;">
+   				<h1 class="panel-title">Question <%=@i%></h1>
+  			</div>
+  			<div class="panel-body">
 			<%= question.body %><br>
 			<% if @quiz.shuffleAnswers %>
 				<% question.answers.shuffle.each do |answer| %>
@@ -18,10 +29,16 @@ Time remaining: <span id="countdown"></span><br>
 			      	<br>
 				<% end %>
 			<% end %>
+			</div>
 			<br><br>
 		<% end %>
 	<% else %>
 		<% @quiz.questions.each do |question| %>
+			<% @i += 1 %>
+			<div class="panel-heading" style="background-color: #f2f2f2;">
+   				<h1 class="panel-title">Question <%=@i%></h1>
+  			</div>
+  			<div class ="panel-body">
 			<%= question.body %><br>
 			<% if @quiz.shuffleAnswers %>
 				<% question.answers.shuffle.each do |answer| %>
@@ -36,6 +53,7 @@ Time remaining: <span id="countdown"></span><br>
 			      	<br>
 				<% end %>
 			<% end %>
+			</div>
 			<br><br>
 		<% end %>
 	<% end %>
@@ -52,6 +70,8 @@ Time remaining: <span id="countdown"></span><br>
 </div>
 
 <% end %>
+</div>
+</div>
 
 <script>
 	function updateTimeSpan() {

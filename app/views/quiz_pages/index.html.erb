@@ -1,18 +1,22 @@
 <script>Turbolinks.pagesCached(0);
 console.log('restored page')</script>
-<%= link_to root_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+
+<%= link_to :back, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
   Back
 <% end %>
-
+<br><br>
 <div dir="<%=@direction%>">
-
-<h3><%=@quiz.title%></h3>
-<p>Please read the information below very carefully, when you click 'Start Quiz' your time will be started and this will count towards the number of attempts allowed.</p>
-<p><strong>Description</strong><br><%=@quiz.description%></p>
-<p><strong>Instructions </strong><br><%=@quiz.instructions%></p>
-<p><strong>Attempts Remaining </strong><%=@attemptRemaining%></p>
-<p><strong>Time Allowed </strong><%=@time_allowed%> minutes</p>
-<p><strong>Number of questions </strong><%=@quiz.questions.count%></p>
+<div class="panel panel-default">
+  	<div class="panel-heading">
+   		<h1 class="panel-title"><%=@quiz.title%></h1>
+  	</div>
+  	<div class="panel-body">
+		<p>Please read the information below very carefully, when you click 'Start Quiz' your time will be started and this will count towards the number of attempts allowed.</p>
+		<p><strong>Description</strong><br><%=@quiz.description%></p>
+		<p><strong>Instructions </strong><br><%=@quiz.instructions%></p>
+		<p><strong>Attempts Remaining </strong><%=@attemptRemaining%></p>
+		<p><strong>Time Allowed </strong><%=@time_allowed%> minutes</p>
+		<p><strong>Number of questions </strong><%=@quiz.questions.count%></p>
 
 
 <br><br>
@@ -25,4 +29,6 @@ console.log('restored page')</script>
 		<%= link_to 'Start Quiz', new_quiz_page_path(:userQuiz => params[:userQuiz]) %></button>
 	</div>
 <% end %>
+  	</div>
+</div>
 </div>
