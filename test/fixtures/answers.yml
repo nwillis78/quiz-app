@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  answerString: MyString
+  answerString: Answer1
   isCorrect: false
-  question_id: 
+  question_id: 1
 
 two:
-  answerString: MyString
-  isCorrect: false
-  question_id: 
+  answerString: Answer2
+  isCorrect: true
+  question_id: 1

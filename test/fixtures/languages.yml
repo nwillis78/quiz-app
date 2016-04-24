@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  languageName: MyString
+  languageName: English
 
 two:
-  languageName: MyString
+  languageName: Arabic

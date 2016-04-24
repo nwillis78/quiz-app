@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  directionName: MyString
-  directionCode: MyString
+  directionName: Left to Right
+  directionCode: LTR
 
 two:
-  directionName: MyString
-  directionCode: MyString
+  directionName: Right to Left
+  directionCode: RTL

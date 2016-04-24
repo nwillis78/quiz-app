@@ -2,8 +2,8 @@
 
 one:
   student_id: 1
-  group_id: 
+  group_id: 1
 
 two:
-  student_id: 1
-  group_id: 
+  student_id: 2
+  group_id: 1

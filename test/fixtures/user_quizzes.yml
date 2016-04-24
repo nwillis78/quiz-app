@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  quiz_id: 
+  quiz_id: 1
   staff_id: 1
   student_id: 1
 
 two:
-  quiz_id: 
+  quiz_id: 2
   staff_id: 1
   student_id: 1

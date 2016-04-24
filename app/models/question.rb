@@ -1,5 +1,4 @@
 class Question < ActiveRecord::Base
-    require_dependency 'lib/association_count_validator.rb'
     before_destroy -> { check_if_in_quiz('destroy') }
     before_update -> {check_if_in_quiz('update')}
 
@@ -13,6 +12,7 @@ class Question < ActiveRecord::Base
     has_many :answers, dependent: :destroy, :autosave => true
     accepts_nested_attributes_for :answers, allow_destroy: true
     
+    validates :la nguage_id, presence: true
     validates :category_id, presence: true
     validates :body, presence: true,
     length: { minimum: 3}
