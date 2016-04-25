@@ -47,7 +47,7 @@ class LanguageTest < ActiveSupport::TestCase
         
         question = Question.new
         question.category_id = 1
-        question.language_id = 1
+        question.language_id = 3
         question.body = 'a' * 3
         question.id = 1
         question.answers = [answer]
@@ -56,7 +56,7 @@ class LanguageTest < ActiveSupport::TestCase
         language = Language.new
         language.languageName = 'a' * 3
         language.direction_id = 1
-        language.id = 1
+        language.id = 3
         language.save
         
         assert_not language.check_if_in_question_or_quiz('a')
@@ -66,13 +66,13 @@ class LanguageTest < ActiveSupport::TestCase
         quiz = Quiz.new
         quiz.attemptsAllowed = 5
         quiz.title = 'a' * 3
-        quiz.language_id = 1
+        quiz.language_id = 3
         quiz.save
         
         language = Language.new
         language.languageName = 'a' * 3
         language.direction_id = 1
-        language.id = 1
+        language.id = 3
         language.save
         
         assert_not language.check_if_in_question_or_quiz('a')
@@ -88,7 +88,7 @@ class LanguageTest < ActiveSupport::TestCase
         
         question = Question.new
         question.category_id = 1
-        question.language_id = 1
+        question.language_id = 3
         question.body = 'a' * 3
         question.id = 1
         question.answers = [answer]
@@ -97,13 +97,13 @@ class LanguageTest < ActiveSupport::TestCase
         quiz = Quiz.new
         quiz.attemptsAllowed = 5
         quiz.title = 'a' * 3
-        quiz.language_id = 1
+        quiz.language_id = 3
         quiz.save
         
         language = Language.new
         language.languageName = 'a' * 3
         language.direction_id = 1
-        language.id = 1
+        language.id = 3
         language.save
         
         assert_not language.check_if_in_question_or_quiz('a')

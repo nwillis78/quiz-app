@@ -17,12 +17,6 @@ class WelcomeController < ApplicationController
   	 	end
   	 end
 
-
-
-  	
-
-
-
   	@studentQuizzes = UserQuiz.where("student_id = ?", current_user.id)
   end
 

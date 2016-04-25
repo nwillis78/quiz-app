@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   directionName: Left to Right
   directionCode: LTR
 
 two:
+  id: 2
   directionName: Right to Left
   directionCode: RTL
