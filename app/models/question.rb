@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
     has_many :answers, dependent: :destroy, :autosave => true
     accepts_nested_attributes_for :answers, allow_destroy: true
     
-    validates :la nguage_id, presence: true
+    validates :language_id, presence: true
     validates :category_id, presence: true
     validates :body, presence: true,
     length: { minimum: 3}

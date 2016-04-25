@@ -1,6 +1,11 @@
 class UserQuiz < ActiveRecord::Base
     belongs_to :quiz
     has_many :results, dependent: :destroy
+
+    validates :quiz_id, presence: true
+    validates :group_id, presence: true
+    validates :staff_id, presence: true
+    validates :student_id, presence: true
     validate :start_not_in_past
 	validate :end_not_in_past_after_start
 

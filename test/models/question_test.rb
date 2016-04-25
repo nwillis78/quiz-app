@@ -150,6 +150,9 @@ class QuestionTest < ActiveSupport::TestCase
         quiz = Quiz.new
         quiz.attemptsAllowed = 5
         quiz.title = 'a' * 3
+        quiz.description = 'a' * 3
+        quiz.instructions = 'a' * 3
+        quiz.time_allowed = 5
         quiz.language_id = 1
         quiz.questions = [question]
         quiz.save
