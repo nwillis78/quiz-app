@@ -36,7 +36,7 @@ class CategoryTest < ActiveSupport::TestCase
         answer.save
         
         question = Question.new
-        question.category_id = 1
+        question.category_id = 3
         question.language_id = 1
         question.body = 'a' * 3
         question.id = 1
@@ -45,7 +45,7 @@ class CategoryTest < ActiveSupport::TestCase
         
         category = Category.new
         category.categoryBody = 'a' * 3
-        category.id = 1
+        category.id = 3
         category.save
         
         assert_not category.check_if_in_question('a')

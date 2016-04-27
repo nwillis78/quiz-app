@@ -1,4 +1,6 @@
 class UserQuizzesController < ApplicationController
+    before_filter :authenticate_user!
+    load_and_authorize_resource
     helper_method :grade
     helper_method :calculate_status
     

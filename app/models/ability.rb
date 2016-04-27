@@ -60,7 +60,7 @@ class Ability
       can :manage,Group
 
       can :manage,Member
-
+      can :manage,UserQuiz
       
   		
       can :manage, Answer

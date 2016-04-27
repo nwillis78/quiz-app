@@ -79,12 +79,15 @@ Time remaining: <span id="countdown"></span>
 	    quiz_start = convertStringToDate(quiz_start);
 	    var quiz_finish = new Date();
 		quiz_finish.setMinutes(quiz_start.getMinutes() + parseInt("<%=@time_allowed%>"));
-
+		quiz_finish.setSeconds(quiz_start.getSeconds())
 	    var _second = 1000;
 	    var _minute = _second * 60;
 	    var _hour = _minute * 60;
     	var _day = _hour * 24;
 	    var timer;
+
+	    console.log(quiz_start)
+	    console.log(quiz_finish)
 
 	    function showRemaining() {
 	        var now = new Date();
@@ -118,9 +121,9 @@ Time remaining: <span id="countdown"></span>
 		return new Date(ymd[0], ymd[1]-1, ymd[2]-4, hms[0]+5, hms[1], hms[2], 0);
 	}
 	
-	window.onbeforeunload = function() {
-       return "Are you sure you want to leave? Answers will not be saved and this will count as an attempt.";
-    };
+	//window.onbeforeunload = function() {
+    //   return "Are you sure you want to leave? Answers will not be saved and this will count as an attempt.";
+    //};
 
 	onload = updateTimeSpan();
 </script>
