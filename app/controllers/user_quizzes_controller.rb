@@ -149,6 +149,27 @@ class UserQuizzesController < ApplicationController
         redirect_to :back
     end
 
+    def destroy_user_quiz
+        #find all the user quizzes
+        @userQuiz = UserQuiz.find(params[:user_quiz_id])
+
+        @userQuizzes = UserQuiz.where("quiz_id = ?", @userQuiz.quiz_id)
+                               .where("group_id = ?", @userQuiz.group_id)
+                               .where("staff_id = ?", @userQuiz.staff_id);
+        #destroy them
+        @userQuizzes.each do |userQuiz|
+            #destroy the user quiz instance
+            userQuiz.destroy
+            #destroy its associated results
+            @results = Result.where("user_quiz_id = ?", userQuiz.id)
+            @results.each do |result|
+                result.destroy
+            end
+        end
+
+        redirect_to root_path
+    end
+
     private
         def user_quiz_params
             params.require(:user_quiz).permit(:quiz_id, :group_id, :start_date, :end_date, :attemptsTaken, :results_available)

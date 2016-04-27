@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :quizzes
   get 'questions/update_questions_direction', as: 'update_questions_direction'
   get "user_quiz/release_results" => "user_quizzes#release_results"
+  get "user_quiz/destroy_user_quiz" => "user_quizzes#destroy_user_quiz"
   #post 'groups/upload' => 'groups/upload'
   post 'groups/upload/:id' => 'groups#upload', :as => :upload
   get 'groups/add_members/:id' => 'groups#add_members', :as => :add_members_groups

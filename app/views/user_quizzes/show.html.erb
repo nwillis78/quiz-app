@@ -2,8 +2,8 @@
   Back
 <% end %>
 <br><br>
-<% @status = calculate_status(@user_quiz.start_date, @user_quiz.end_date) %>
-<% if @status == "Scheduled for Release" %>
+      <% @status = calculate_status(@user_quiz.start_date, @user_quiz.end_date) %>
+      <% if @status == "Scheduled for Release" %>
 				<%@color = "#fcf8e3" %>
 			<% elsif @status == "Live" %>
 				<%@color = "#dff0d8"%>
@@ -35,20 +35,34 @@
 			The members in this group are displayed in the table below, along with their ongoing quiz statistics.
 		</p>
 
-		<div class="inner-panel-title">
+		  <div class="inner-panel-title">
    			Available Actions
   		</div>
+
   		<% @results_available = @user_quiz.results_available %>
+
   		<% if ((@status == "Closed") && (@results_available==false)) %>
-  			<div id="button_text">
-			<button type = "button" class="btn btn-primary">
-			<%= link_to "Release Results", { :controller => "user_quizzes", :action => "release_results", :quiz_id => @user_quiz.quiz_id} %></button>
-			</div><br>
-		<% elsif ((@status == "Closed") && (@results_available==true)) %>
-			<p> This quiz has finished and you have already released the results. Not further actions can be taken.</p>
+      			<div id="button_text">
+    			<button type = "button" class="btn btn-primary">
+    			<%= link_to "Release Results", { :controller => "user_quizzes", :action => "release_results", :quiz_id => @user_quiz.quiz_id} %></button>
+    			</div><br>
+		  <% elsif ((@status == "Closed") && (@results_available==true)) %>
+			     <p> This quiz has finished and you have already released the results.</p>
   		<% else %>
+
   			<p> This quiz hasn't finished yet. Results cannot be released.</p>
   		<% end %>
+
+      You may destroy this setting. The quiz and group will not be deleted, only the setting.<br>
+      After you have destroyed this setting, it's tile will dissapear from both your homepage and the
+      hompages of the students it was set to. <br>
+      <strong>Warning:</strong> This action is irreversible and will permanently delete all student
+      resuults from the system. You should make sure that you have recorded results that you wish to 
+      keep <strong>before</strong> destroying this setting.
+      <div id="button_text">
+          <button type = "button" class="btn btn-danger">
+          <%= link_to "Destroy", { :controller => "user_quizzes", :action => "destroy_user_quiz", :user_quiz_id => @user_quiz.id} %></button>
+          </div><br>
 
   		<div class="inner-panel-title">
    			Results
