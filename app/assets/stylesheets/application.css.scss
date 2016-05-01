@@ -44,6 +44,10 @@ body {
     float:left;
 }
 
+.flash.alert:empty {
+  display: none;
+}
+
 #tiles {
     cursor:pointer;
 }
