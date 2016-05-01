@@ -44,7 +44,7 @@
   		<% if ((@status == "Closed") && (@results_available==false)) %>
       			<div id="button_text">
     			<button type = "button" class="btn btn-primary">
-    			<%= link_to "Release Results", { :controller => "user_quizzes", :action => "release_results", :quiz_id => @user_quiz.quiz_id} %></button>
+    			<%= link_to "Release Results", { :controller => "user_quizzes", :action => "release_results", :quiz_id => @user_quiz.quiz_id}, data: {confirm: 'Are you you want to release results to students? Students will be able to see all questions and answers to the quiz and this action will be irreversible.'}  %></button>
     			</div><br>
 		  <% elsif ((@status == "Closed") && (@results_available==true)) %>
 			     <p> This quiz has finished and you have already released the results.</p>
@@ -61,7 +61,8 @@
       keep <strong>before</strong> destroying this setting.
       <div id="button_text">
           <button type = "button" class="btn btn-danger">
-          <%= link_to "Destroy", { :controller => "user_quizzes", :action => "destroy_user_quiz", :user_quiz_id => @user_quiz.id} %></button>
+          <%= link_to "Destroy", { :controller => "user_quizzes", :action => "destroy_user_quiz", :user_quiz_id => @user_quiz.id},
+          data: {confirm: 'Are you you want to delete this setting? ALL student results will be deleted and this action will be irreversible.'}  %></button>
           </div><br>
 
   		<div class="inner-panel-title">
