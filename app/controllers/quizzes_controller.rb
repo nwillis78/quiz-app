@@ -97,8 +97,12 @@ class QuizzesController < ApplicationController
     def destroy
         @quiz = Quiz.find(params[:id])
         @quiz.destroy
-        
-        redirect_to quizzes_path
+
+        if @quiz.destroyed?
+            redirect_to quizzes_path
+        else
+            redirect_to quizzes_path, :flash => { :danger => "Error: #{@quiz.errors[:base][0].to_s}" }
+        end
     end
 
     def take

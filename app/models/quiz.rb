@@ -1,4 +1,7 @@
 class Quiz < ActiveRecord::Base
+	before_destroy -> { check_if_set('destroy') }
+    before_update -> {check_if_set('update')}
+
 	has_many :links
 	has_many :questions, through: :links
 	belongs_to :user
@@ -19,5 +22,17 @@ class Quiz < ActiveRecord::Base
     def getNoQuestions
 	    questions.length
 	end
+
+	def check_if_set(method)
+		@userQuizzes = UserQuiz.all
+
+
+		@userQuizzes.each do |userQuiz|
+			if userQuiz.quiz_id == self.attributes['id']
+				errors.add(:base, "Cannot "+method+" quiz while it has been set to students")
+				return false
+			end
+		end
+    end
 
 end
