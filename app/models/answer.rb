@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
 
-  validates :answerString, presence: true, length: { minimum: 3}
+  validates :answerString, presence: true
 end
