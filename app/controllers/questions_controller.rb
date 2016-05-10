@@ -8,8 +8,9 @@ class QuestionsController < ApplicationController
         #@questions = Question.where("user_id = ?", current_user.id)
         #@questions = Question.where("user_id=?", current_user.id).paginate(:page => params[:page], :per_page => 8)
         @q = Question.where("questions.user_id = ?", current_user.id).joins(:category).search(params[:q])
-
+        @q.sorts = 'category_categoryBody asc' if @q.sorts.empty?
         @questions = @q.result.paginate(:page => params[:page], :per_page => 8)
+        @search = Question.where("questions.user_id = ?", current_user.id).ransack(params[:q])
     end
     
     def show
