@@ -11,10 +11,12 @@ Time remaining: <span id="countdown"></span>
 	<% if @quiz.shuffleQuestions %>
 		<% @quiz.questions.shuffle.each do |question| %>
 			<% @i += 1 %>
+			<% @direction = Direction.find(question.language.direction_id).directionCode %>
 			<div class="panel-heading" style="background-color: #f2f2f2;">
    				<h1 class="panel-title">Question <%=@i%></h1>
   			</div>
   			<div class="panel-body">
+  			<div dir="<%=@direction%>">
 			<%= question.body %><br>
 			<% if @quiz.shuffleAnswers %>
 				<% question.answers.shuffle.each do |answer| %>
@@ -30,15 +32,18 @@ Time remaining: <span id="countdown"></span>
 				<% end %>
 			<% end %>
 			</div>
+			</div>
 			<br><br>
 		<% end %>
 	<% else %>
 		<% @quiz.questions.each do |question| %>
 			<% @i += 1 %>
+			<% @direction = Direction.find(question.language.direction_id).directionCode %>
 			<div class="panel-heading" style="background-color: #f2f2f2;">
    				<h1 class="panel-title">Question <%=@i%></h1>
   			</div>
   			<div class ="panel-body">
+  			<div dir="<%=@direction%>">
 			<%= question.body %><br>
 			<% if @quiz.shuffleAnswers %>
 				<% question.answers.shuffle.each do |answer| %>
@@ -53,6 +58,7 @@ Time remaining: <span id="countdown"></span>
 			      	<br>
 				<% end %>
 			<% end %>
+			</div>
 			</div>
 			<br><br>
 		<% end %>

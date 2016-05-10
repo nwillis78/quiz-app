@@ -46,6 +46,9 @@ gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatabl
 gem "epi_cas", git: "https://git.shefcompsci.org.uk/gems/epi_cas.git"
 gem 'cancancan'
 
+gem 'will_paginate', '~> 3.0.5'
+gem 'ransack'
+
 
 
 group :development, :test do

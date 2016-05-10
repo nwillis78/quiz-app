@@ -4,7 +4,9 @@ class QuizzesController < ApplicationController
 
     def index
         @noQuizzes = 0
-        @quizzes = Quiz.where("user_id = ?", current_user.id)
+        #@quizzes = Quiz.where("user_id = ?", current_user.id).paginate(:page => params[:page], :per_page => 10)
+        @q = Quiz.where("quizzes.user_id = ?", current_user.id).search(params[:q])
+        @quizzes = @q.result.paginate(:page => params[:page], :per_page => 8)
 
         @quizzes.each do |quiz|
             if UserQuiz.where("quiz_id=?", quiz.id).blank?

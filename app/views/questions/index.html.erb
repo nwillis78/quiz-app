@@ -12,10 +12,11 @@
 
     <br>
 
-    <table style="width:100%;" class="index">
+
+    <table style="width:100%;" class="index pretty">
       <tr>
-        <th>Category</th>
-        <th>Language</th>
+        <th><%= sort_link(@q, :category_categoryBody, "Category" )%></th>
+        <th><%= sort_link(@q, :language_languageName, "Language") %> </th>
         <th>Question text</th>
         <th colspan="3">Manage</th>
       </tr>
@@ -49,5 +50,12 @@
 		</tr>
       <% end %>
     </table>
+    <br>
+
+    <div class="digg_pagination">
+    <%= will_paginate @questions%>
+    </div>
+
+    </div>
     </div>
 </div>

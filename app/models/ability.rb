@@ -61,8 +61,6 @@ class Ability
 
       can :manage,Member
       can :manage,UserQuiz
-      
-  		
       can :manage, Answer
 
     else

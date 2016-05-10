@@ -1,4 +1,4 @@
-<%= link_to :back, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
+<%= link_to quizzes_path, :class => "fa fa-arrow-circle-o-left fa-lg" do %>
   Back
 <% end %>
 <br><br>
@@ -46,6 +46,7 @@
 
   	<% @i=0 %>
   	<% @quiz.questions.each do |question| %>
+    <% @questionDirection = Direction.find(question.language.direction_id).directionCode %>
   		<% @i = @i+1 %>
   		<div class="panel-heading">
    			<h1 class="panel-title">Question <%= @i %></h1>
@@ -55,13 +56,14 @@
 				<strong>Category:</strong> <%= question.category.categoryBody %>
 			</p>
 			<p>
-				<div dir="<%=@direction%>"><%= question.body %></div>
+				<div dir="<%=@questionDirection%>"><%= question.body %></div>
 			</p>
 				<strong>Answers:</strong>
   		</div>
   		
   		<% question.answers.each do |answer| %>
-  			<%if @direction == "LTR" %>
+        <!-- find the direction of each question -->
+  			<%if @questionDirection == "LTR" %>
       <% if answer.isCorrect %>
         <li class="list-group-item list-group-item-success"><div style="float:right;">Correct</div><%= answer.answerString %></li>
       <% else %>

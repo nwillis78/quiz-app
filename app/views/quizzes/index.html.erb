@@ -39,8 +39,8 @@
 
     <table style="width:100%;" class="index">
       <tr>
-		<th>Language</th>
-		<th>Title</th>
+        <th><%= sort_link(@q, :language_languageName, "Language") %> </th>
+        <th><%= sort_link(@q, :title )%></th>
 		<th>Description</th>
 		<th>Instructions</th>
 		<th>No. Questions</th>
@@ -69,6 +69,11 @@
         </tr>
       <% end %>
     </table>
+    <br>
+
+    <div class="digg_pagination">
+    <%= will_paginate @quizzes%>
+    </div>
 
 </div>
 </div>

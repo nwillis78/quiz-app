@@ -1,9 +1,15 @@
 class QuestionsController < ApplicationController
     before_filter :authenticate_user!
     load_and_authorize_resource
+
+    helper_method :sort_column, :sort_direction
     
     def index
-        @questions = Question.where("user_id = ?", current_user.id)
+        #@questions = Question.where("user_id = ?", current_user.id)
+        #@questions = Question.where("user_id=?", current_user.id).paginate(:page => params[:page], :per_page => 8)
+        @q = Question.where("questions.user_id = ?", current_user.id).joins(:category).search(params[:q])
+
+        @questions = @q.result.paginate(:page => params[:page], :per_page => 8)
     end
     
     def show
